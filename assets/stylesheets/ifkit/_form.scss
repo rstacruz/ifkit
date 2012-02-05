@@ -1,0 +1,43 @@
+@import 'ifkit/settings';
+@import 'compass/css3';
+
+@mixin if-textbox(
+  $height              : $if-input-height,
+  $padding             : $if-input-padding,
+  $radius              : $if-input-border-radius,
+  $bg                  : $if-input-background,
+  $border-opacity      : $if-input-border-opacity,
+  $shadow              : $if-input-shadow,
+  $disabled-strength   : 0.97,
+  $text-color          : mix(#888, invert($bg), 40%),
+  $disabled-text-color : mix(#888, $bg, 70%)
+) {
+  @include box-sizing(border-box);
+  min-height: $height;
+
+  padding: $padding;
+  border: solid 1px rgba(black, $border-opacity);
+  @include border-radius($radius);
+  @include box-shadow($shadow);
+  background: $bg;
+
+  color: $text-color;
+  font-size: $if-form-font-size;
+
+  &:not(:disabled):hover {
+    border-color: mix($if-accent, rgba(black, $border-opacity), 60%); }
+
+  &:focus {
+  @include transition(all 150ms linear);
+    outline: 0;
+    border-color: $if-accent;
+    @include box-shadow(
+      $if-input-shadow,
+      0 0 8px rgba($if-accent, 0.5),
+      0 0 4px rgba($if-accent, 0.5)); }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $bg * $disabled-strength;
+    text-shadow: 1px 1px 1px rgba(white, 0.4);
+    color: $disabled-text-color; } }
