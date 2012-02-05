@@ -1,6 +1,27 @@
+//@ [Group] Forms
+//
+
+//@ [Variable] $if-textboxes
+// Alias for the selector that targets all textboxes. Equivalent to
+// `input[type=text], input[type=password],
+// input[type=email], input[type=search]`.
+
 @import 'ifkit/settings';
 @import 'compass/css3';
 
+//@ [Mixin] if-textbox
+//
+// Textbox. Includes styles for disabled, hover, focus, et al. Works great
+// for `<input>` and `<textarea>` alike.
+//
+//     # CSS
+//     #{$if-textboxes}.textbox {
+//       @include if-textbox; }
+//
+//     # HTML
+//     <input class='textbox' type='text'>
+//     <input class='textbox' type='text' value='Disabled' disabled>
+//
 @mixin if-textbox(
   $height              : $if-input-height,
   $padding             : $if-input-padding,

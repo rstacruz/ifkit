@@ -1,0 +1,11 @@
+!!!5
+%html
+  %head
+    %style
+      != css
+  %body
+
+    #content
+      - blocks.each do |b|
+        %section
+          = b.html
