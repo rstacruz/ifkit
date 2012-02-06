@@ -32,7 +32,9 @@
   %script{:src => 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js'}
   %script{:src => "http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js"}
   :javascript
-    prettyPrint();
+    if (typof prettyPrint !== 'undefined') {
+      prettyPrint();
+    }
   :javascript
     if (typeof $ !== 'undefined') {
       $('.if-toggle').live('click', function(e) {
