@@ -17,8 +17,9 @@
 //         @include if-textbox; } }
 //
 //     # HAML
-//     %input.textbox{type: 'text'}
-//     %input.textbox{type: 'text', value: 'Disabled', disabled: true}
+//     %input.textbox{type: 'text', value: 'Normal text box'}
+//     and
+//     %input.textbox{type: 'text', value: 'Disabled text box', disabled: true}
 //
 // Textbox. Includes styles for disabled, hover, focus, et al. Works great
 // for `<input>` and `<textarea>` alike.
@@ -69,6 +70,9 @@
 //     # HAML
 //     %select.my-select
 //       %option Choose your weapon...
+//     and
+//     %select.my-select{disabled: true}
+//       %option Disabled
 //
 //     # CSS
 //     .my-select {
@@ -79,13 +83,19 @@
   $bg     : $if-input-background,
   $text-color : mix(#888, invert($bg), 40%)
 ) {
+  $disabled-strength: 0.97;
+  $disabled-text-color: mix(#888, $bg, 70%);
 
   height: $height;
   line-height: $height;
 
   background: $bg;
   color: #333;
-  border: solid 1px mix($text-color, $bg, 20%); }
+  border: solid 1px mix($text-color, $bg, 20%);
+
+  &:disabled {
+    background: $bg * $disabled-strength;
+    color: $disabled-text-color; } }
 
 //@[Mixin] if-form-layout([ $label-width, $field-height, $field-margin, $field-selector, $control-group-selector, $control-selector ])
 //

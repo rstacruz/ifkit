@@ -22,7 +22,7 @@ module Ifdoc
     # Converts <p>x :: y</p> to <dl><dt>x</dt><dd>y</dd></dl>.
     def work_definition_lists!
       @html.css('p').each do |para|
-        if para.inner_html.match(/^(.*?)\s+::\s+(.*?)$/m)
+        if para.inner_html.match(/^(.*?)\s+::\s+(.*)$/m)
           para.name = 'dl'
           para.inner_html = "<dt>#{$1}</dt><dd>#{$2}</dd>"
         end
