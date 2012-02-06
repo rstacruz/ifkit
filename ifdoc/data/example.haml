@@ -12,9 +12,9 @@
     - if html?
       %div.if-html
         %h3 HTML
-        %pre.linenums.prettyprint.lang-html~ html_escape(html).gsub("\n", '<br>')
+        %pre.prettyprint.lang-html~ html_escape(html).gsub("\n", '<br>')
 
     - if css?
       %div.if-css
         %h3 CSS
-        %pre.linenums.prettyprint.lang-c~ html_escape(css).gsub("\n", '<br>')
+        %pre.prettyprint.lang-c~ html_escape(css).gsub("\n", '<br>')

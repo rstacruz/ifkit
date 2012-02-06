@@ -55,7 +55,9 @@ module Ifdoc
     end
 
     def css
-      Tilt.new(css_format, css_options) { sass }.render
+      Tilt.new(css_format, css_options) { sass }.render.
+        gsub(/(\/\*.*?\*\/\s*)/m, '').
+        gsub(/\n{2,}/m, "\n")
     end
 
     # scss or sass?
@@ -71,7 +73,7 @@ module Ifdoc
       opts = Compass.sass_engine_options
       paths = @config['sass']['load_paths']
       paths += opts[:load_paths]
-      { :load_paths => paths }
+      { :load_paths => paths, :style => :compact }
     end
 
     # Sass source
