@@ -53,26 +53,26 @@
 // You may specify additional parameters. All parameters except `$color` are
 // optional.
 //
-//   $color
-//   : The base color.
+//   $color ::
+//   The base color.
 //
-//   $strength
-//   : Multiplier for the gradient color. `1.0` makes the button flat, `0`
+//   $strength ::
+//   Multiplier for the gradient color. `1.0` makes the button flat, `0`
 //   makes the button dark.
 //
-//   $border-strength
-//   : Multiplier for the border color. `1.0` makes the border have the same
+//   $border-strength ::
+//   Multiplier for the border color. `1.0` makes the border have the same
 //   color as the button, `< 1` makes it darker, `> 1` makes it lighter.
 //   `none` removes the border.
 //
-//   $hover-strength
-//   : Multiplier for the hover color.
+//   $hover-strength ::
+//   Multiplier for the hover color.
 //
-//   $active-strength
-//   : Multiplier for the color for the active state (depressed) of the button.
+//   $active-strength ::
+//   Multiplier for the color for the active state (depressed) of the button.
 //
-//   $highlight-opacity
-//   : Opacity for the highlight. `0.0` makes it invisible, `1.0` makes it
+//   $highlight-opacity ::
+//   Opacity for the highlight. `0.0` makes it invisible, `1.0` makes it
 //   completely white.
 //
 //     # CSS

@@ -1,4 +1,4 @@
-module StyleDoc
+module Ifdoc
   class Extractor
     def initialize(file)
       @file  = file

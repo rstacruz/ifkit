@@ -3,7 +3,7 @@ require 'tilt'
 require 'sass'
 require 'compass'
 
-module StyleDoc
+module Ifdoc
   class Project
     attr_reader :files
 

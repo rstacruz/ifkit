@@ -1,4 +1,4 @@
-module StyleDoc
+module Ifdoc
   class Block
     attr_reader :file
     attr_reader :line

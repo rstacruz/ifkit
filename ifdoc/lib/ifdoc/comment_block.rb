@@ -1,4 +1,4 @@
-module StyleDoc
+module Ifdoc
   class CommentBlock
     attr_reader :file
     attr_reader :line

@@ -1,9 +1,11 @@
 namespace :doc do
   task :build do
-    require './styledoc/styledoc'
+    $:.unshift File.expand_path('../ifdoc/lib', __FILE__)
+
+    require 'ifdoc'
     require 'yaml'
 
-    s = StyleDoc::Project.new YAML::load_file('styledoc.yml')
+    s = Ifdoc::Project.new YAML::load_file('ifdoc.yml')
     s.build!
 
     puts "Wrote to output/index.html."
