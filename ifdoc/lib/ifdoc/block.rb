@@ -15,23 +15,19 @@ module Ifdoc
       end
     end
 
+    def transformer
+      @transformer ||= Transformer.new \
+        :html => markdown_as_html
+    end
+
     def valid?
       @valid
     end
 
-    def raw_markdown
+    def markdown
       content.
         gsub(/^@? {0,3}\[mixin\] (.*?) ?\((.*?)\)$/i) { |s| to_mixin_heading $1, $2 }.
         gsub(/^@? {0,3}\[(.*?)\] /m) { |s| to_heading($1.downcase) + ' ' }
-    end
-
-    def markdown
-      raw_markdown
-    end
-
-    # Example HTML
-    def src_html
-      SubExtractor.new(markdown, "HTML").blocks.map { |b| b.content }.join("\n")
     end
 
     # Example CSS
@@ -39,12 +35,13 @@ module Ifdoc
       SubExtractor.new(markdown, "CSS").blocks.map { |b| b.content }.join("\n")
     end
 
-    def raw_html
-      @raw_html ||= redcarpet.render(markdown).force_encoding('utf-8')
+    # Returns
+    def markdown_as_html
+      @markdown_as_html ||= redcarpet.render(markdown).force_encoding('utf-8')
     end
 
     def html
-      raw_html + "\n" + src_html
+      transformer.html
     end
 
     def to_s
