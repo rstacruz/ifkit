@@ -1,0 +1,17 @@
+%section.if-example
+
+  %div.if-result
+    %div
+      != html
+
+  %div.if-code
+
+    - if html?
+      %div.if-html
+        %h3 HTML
+        %pre~ html_escape(html).gsub("\n", '<br>')
+
+    - if css?
+      %div.if-css
+        %h3 CSS
+        %pre~ html_escape(css).gsub("\n", '<br>')

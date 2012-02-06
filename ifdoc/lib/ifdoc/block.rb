@@ -1,5 +1,17 @@
 module Ifdoc
+  # A Block comment
+  #
+  #     block.level               #=> 3 (based on <h3>)
+  #
+  #     block.name                #=> "Block forms (and things)"
+  #     block.id                  #=> "block_forms"
+  #     block.main_type           #=> "section"
+  #
+  #     block.example_css         # All CSS from examples
+  #
   class Block
+    extend AttrCacheable
+
     attr_reader :file
     attr_reader :line
     attr_reader :content
@@ -15,6 +27,27 @@ module Ifdoc
       end
     end
 
+    def level
+      html.match(/<[hH]([123456])>/) && $1.to_i
+    end
+
+    def name
+      # "Things there (and here)" => "things_there"
+      html.match(/<[hH][123456]>(.*?)<\/h/) && $1.match(/^(.*?)(?:\(.*)?$/) && $1.strip
+    end
+
+    def id
+      name.scan(/[A-Za-z0-9\-]+/).join('_').downcase
+    end
+
+    def headings
+      content.scan(/^@? {0,3}\[.*?\] (.*?)(?:\(.*)?$/).flatten
+    end
+
+    def main_type
+      content.match(/^@? {0,3}\[(.*?)\]/) && $1.downcase
+    end
+
     def transformer
       @transformer ||= Transformer.new \
         :html => markdown_as_html
@@ -26,18 +59,18 @@ module Ifdoc
 
     def markdown
       content.
-        gsub(/^@? {0,3}\[mixin\] (.*?) ?\((.*?)\)$/i) { |s| to_mixin_heading $1, $2 }.
+        gsub(/^@? {0,3}\[mixin\] (.*?) ?(?:\((.*?)\))?$/i) { |s| to_mixin_heading $1, $2 }.
         gsub(/^@? {0,3}\[(.*?)\] /m) { |s| to_heading($1.downcase) + ' ' }
     end
 
     # Example CSS
-    def src_css
-      SubExtractor.new(markdown, "CSS").blocks.map { |b| b.content }.join("\n")
+    def example_css
+      transformer.examples.map { |ex| ex.css }.join "\n"
     end
 
     # Returns
     def markdown_as_html
-      @markdown_as_html ||= redcarpet.render(markdown).force_encoding('utf-8')
+      redcarpet.render(markdown).force_encoding('utf-8')
     end
 
     def html
@@ -63,10 +96,13 @@ module Ifdoc
     end
 
     def to_heading(str)
-      case str
-      when 'group' then '##'
-      else '###'
-      end
+      level = case str
+        when 'intro' then 1
+        when 'group' then 2
+        else 3
+        end
+
+      '#' * level
     end
 
     def redcarpet
@@ -75,5 +111,9 @@ module Ifdoc
         Redcarpet::Render::HTML,
         :fenced_code_blocks => true
     end
+
+    attr_cacheable \
+      :level, :name, :id, :headings, :main_type, :transformer, :valid?,
+      :markdown, :example_css, :markdown_as_html, :html
   end
 end

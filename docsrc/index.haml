@@ -5,7 +5,21 @@
       != css
   %body
 
-    #content
+    %header#if-top
+      %strong= project.name
+      %span documentation
+
+    #if-content
       - blocks.each do |b|
-        %section
+        %section{id: b.id, class: "if-section if-level-#{b.level} if-type-#{b.main_type}"}
+
+          - if b.level == 3
+            %h3.if-headings
+              - b.headings.each do |heading|
+                = heading
+                %br
+
           = b.html
+
+    #if-index
+      Index

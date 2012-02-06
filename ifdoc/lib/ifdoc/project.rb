@@ -4,16 +4,29 @@ require 'sass'
 require 'compass'
 
 module Ifdoc
+  # Yay a project.
+  #
+  #     project.root
+  #     project.blocks        # Array of Block
+  #     project.html          # Final output!
+  #
+  #     project.css           # All CSS
+  #     project.example_css   # CSS from all examples
+  #
   class Project
     attr_reader :files
 
     def initialize(config)
       @config = config
-      @files = config['sources'].map { |path| Dir[path] }.flatten.compact
+      @files = config['sources'].map { |path| Dir[path] }.flatten.compact.uniq
     end
 
     def root
       Dir.pwd
+    end
+
+    def name
+      blocks.first.name
     end
 
     def comment_blocks
@@ -32,12 +45,13 @@ module Ifdoc
     def html
       Tilt.new(@config['html']).render(self, {
         :css => css,
-        :blocks => blocks
+        :blocks => blocks,
+        :project => self
       })
     end
 
-    def src_css
-      blocks.map { |b| b.src_css }.join("\n")
+    def example_css
+      blocks.map { |b| b.example_css }.join "\n"
     end
 
     def css
@@ -62,7 +76,7 @@ module Ifdoc
 
     # Sass source
     def sass
-      [ css_header, src_css ].join("\n")
+      [ css_header, example_css ].join("\n")
     end
 
     # The CSS header based on the given css file

@@ -1,4 +1,5 @@
 @import 'normalize';
+@include normalize;
 
 $slate: #707090;
 
@@ -15,38 +16,43 @@ body {
   @include box-shadow(1px 1px 1px rgba(black, 0.1));
   font-family: 'helvetica neue', sans-serif; }
 
-code {
-  @include hilite; }
+@mixin explanation {
+  code {
+    @include hilite; }
 
-dl {
-  // margin-left: -160px;
-  overflow: hidden; }
+  dl {
+    // margin-left: -160px;
+    overflow: hidden; }
 
-dt, dd {
-  margin-bottom: 0.5em; }
+  dt, dd {
+    margin-bottom: 0.5em; }
 
-dt {
-  @include box-sizing(border-box);
-  color: $slate * 1.2;
-  text-align: right;
-  margin-top: 3px;
-  float: left;
-  clear: left;
-  width: 140px;
-  margin-right: 20px;
-  font-size: 0.8em; }
+  dt {
+    @include box-sizing(border-box);
+    color: $slate * 1.2;
+    text-align: right;
+    margin-top: 3px;
+    float: left;
+    clear: left;
+    width: 140px;
+    margin-right: 20px;
+    font-size: 0.8em; }
 
-dd {
-  font-size: 1em;
-  margin-left: 160px; }
+  dd {
+    font-size: 1em;
+    margin-left: 160px; } }
 
 /////////////////////////////////////////////////////////////////////////////
 
 body {
   padding: 40px; }
 
-#top {
-  margin: -40px -40px 40px -40px;
+#if-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 31337;
 
   height: 40px;
   line-height: 40px;
@@ -69,47 +75,74 @@ body {
     color: #555; }
 
   span {
-    color: #aaa; } }
+    color: #555; } }
 
-#content {
+#if-content {
+  padding-top: 40px;
   width: 860px; }
 
 /////////////////////////////////////////////////////////////////////////////
 
+#if-index {
+  position: fixed;
+  top: 60px;
+  right: 20px;
+  bottom: 20px;
+  width: 190px;
+  background: #eee;
+  z-index: 31335;
+
+  @include box-sizing(border-box);
+  padding: 10px;
+  @include border-radius(3px);
+  border: solid 1px #ddd;
+
+  overflow-x: hidden;
+  overflow-y: auto; }
+
+/////////////////////////////////////////////////////////////////////////////
+
 // A section
-#content>section,
-#content>hgroup {
+.if-section {
   border-top: solid 1px #c0c0d0;
   padding-top: 1.5em;
   margin: 1.5em 0;
 
   padding-left: 200px;
 
+  @include explanation;
+
+  // Hotshot
+  &.if-level-1 {
+    border-top: 0;
+    margin-bottom: 5em; }
+
+  &.if-level-2 {
+    border-top: solid 2px #888; }
+
   // Left side heading
-  // > h3 {
-  //   width: 200px;
-  //   float: left;
+  > .if-headings {
+    width: 200px;
+    float: left;
 
-  //   margin: 0 0 0 -200px;
+    margin: 0 0 0 -200px;
 
-  //   font-size: 0.9em;
-  //   color: #a53;
+    font-size: 0.9em;
+    color: #a53;
 
-  //   display: inline-block; }
+    display: inline-block;
 
-  // > h3 + p, > h3 + h4 {
-  //   margin-top: 0; }
+    & + * {
+      margin-top: 0; } }
 
-  // &.heading {
-  //   h1 {
-  //     font-size: 4em; font-weight: 100;
-  //     margin: 0; padding: 0; }
+  // Heading 1
+  h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 4em;
+    font-weight: 100; }
 
-  //   margin: 3em 0 4em 0;
-  //   border-top: 0;
-  //   padding-top: 0;
-  //   margin-top: 0; }
-
+  // Heading
   h3 em {
     font-weight: normal;
     color: $slate; }
@@ -120,9 +153,6 @@ body {
   h3 + h3 {
     margin-top: 0; }
 
-  // h2
-  // border-top: solid 2px #999;
-
   // Top heading
   h2 {
     margin-top: -5px;
@@ -132,53 +162,57 @@ body {
 
 /////////////////////////////////////////////////////////////////////////////
 
-// The pair
-.pair {
-  display: table;
-  width: 100%;
-  margin: 1em 0;
+.if-example {
+  margin: 2em 0;
 
-  background: #eee;
-  @include border-top-radius(4px);
-  border: solid 1px #ddd;
+  .if-result {
+    overflow: hidden;
+    overflow: auto;
 
-  text-shadow: 1px 1px 1px rgba(white, 0.5);
-
-  .column {
-    display: table-cell;
-    width: 50%;
+    background: #fafafa;
+    @include border-top-radius(4px);
+    border: solid 1px #ddd;
 
     @include box-sizing(border-box);
-    padding: 10px 20px; }
+    padding: 20px;
 
-  .column:first-child {
-    border-right: solid 1px #ddd; }
+    position: relative;
+    z-index: 0;
 
-  .column h3 {
-    font-size: 0.8em;
+    @include box-shadow(inset 2px 2px 2px rgba(black, 0.05)); }
 
-    color: #888;
-    margin: 0 0 10px 0; }
-}
+  .if-result > div {
+    @include normalize; }
 
-pre {
-  font-family: monaco, monospace;
-  font-size: 0.75em;
+  pre {
+    font-family: monaco, monospace;
+    font-size: 0.75em;
 
-  overflow-y: hidden;
-  overflow-x: auto; }
+    overflow-y: hidden;
+    overflow-x: auto; }
 
-.result {
-  margin-top: -1em;
-  background: #fafafa;
-  @include border-bottom-radius(4px);
-  border: solid 1px #ddd;
+  .if-code {
+    display: table;
+    width: 100%;
 
-  @include box-sizing(border-box);
-  padding: 20px;
+    background: #eee;
+    @include border-bottom-radius(4px);
+    border: solid 1px #ddd;
 
-  position: relative;
-  z-index: 0;
+    text-shadow: 1px 1px 1px rgba(white, 0.5);
 
-  @include box-shadow(inset 2px 2px 2px rgba(black, 0.05)); }
+    >* {
+      display: table-cell;
+      width: 50%;
 
+      @include box-sizing(border-box);
+      padding: 10px 20px; }
+
+    >*:first-child {
+      border-right: solid 1px #ddd; }
+
+    >* h3 {
+      font-size: 0.8em;
+
+      color: #888;
+      margin: 0 0 10px 0; } } }

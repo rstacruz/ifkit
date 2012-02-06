@@ -1,4 +1,5 @@
 sources:
+ - docsrc/INTRO
  - assets/stylesheets/ifkit/*.scss
 
 sass:
