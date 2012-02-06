@@ -6,14 +6,21 @@ sources:
  - docsrc/INTRO
  - assets/stylesheets/ifkit/*.scss
 
-# Then use these ase templates:
+# Build a CSS file out of this file.
+# Note that you must include the stylesheets above yourself, manually, in this sheet.
 css: docsrc/style.scss
+
+# For the documentation, build an HTML document out of this file.
 html: docsrc/index.haml
 
 # ...Then build things into this folder.
 output_path: output
 
-# Be sure to pass these options to the SASS engine:
+# If you need to copy assets to the output folder:
+# copy:
+#   docsrc/images: images
+
+# Pass these options to the SASS engine.
 sass:
   load_paths:
    - assets/stylesheets/

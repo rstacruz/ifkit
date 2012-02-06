@@ -2,4 +2,4 @@
 $:.unshift File.expand_path('../../lib', __FILE__)
 require 'ifdoc/cli'
 
-Ifdoc::CLI.run!
+Ifdoc::CLI.new.run!

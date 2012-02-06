@@ -157,9 +157,9 @@
   $label-width: 150px,
   $field-height: 32px,
   $field-margin: 20px,
-  $field: ".field",
-  $control-group: ".controls",
-  $control: ".control"
+  $field: $if-form-field,
+  $control-group: $if-form-control-group,
+  $control: $if-form-control,
 ) {
   #{$field} {
     @include if-clearfix;
