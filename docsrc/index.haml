@@ -22,4 +22,7 @@
           = b.html
 
     #if-index
-      Index
+      %h1 Index
+      - blocks.each do |b|
+        - b.headings.each do |h|
+          %a{href: "##{b.id}", class: "if-level-#{b.level}"}= h

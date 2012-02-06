@@ -98,7 +98,27 @@ body {
   border: solid 1px #ddd;
 
   overflow-x: hidden;
-  overflow-y: auto; }
+  overflow-y: auto;
+
+  font-size: 0.9em;
+
+  h1 {
+    font-size: 1em;
+    margin: 0;
+    padding: 0; }
+
+  a {
+    color: #888;
+    text-shadow: 1px 1px 1px rgba(white, 0.2);
+    text-decoration: none;
+    display: block; }
+
+  a.if-level-1,
+  a.if-level-2 {
+    margin: 5px 0;
+    color: #666;
+    font-weight: bold; }
+}
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -107,8 +127,7 @@ body {
   border-top: solid 1px #c0c0d0;
   padding-top: 1.5em;
   margin: 1.5em 0;
-
-  padding-left: 200px;
+  position: relative;
 
   @include explanation;
 
@@ -120,20 +139,33 @@ body {
   &.if-level-2 {
     border-top: solid 2px #888; }
 
-  // Left side heading
-  > .if-headings {
-    width: 200px;
-    float: left;
+  > .if-headings { display: none; }
 
-    margin: 0 0 0 -200px;
+  // Iconssss
+  padding-left: 70px;
+  &.if-type-mixin, &.if-type-variable, &.if-type-section {
+    &:before {
+      display: block;
 
-    font-size: 0.9em;
-    color: #a53;
+      position: absolute;
+      left: 0;
+      top: 1.6em;
 
-    display: inline-block;
+      width: 42px;
+      height: 42px;
+      line-height: 42px;
 
-    & + * {
-      margin-top: 0; } }
+      background: #eee;
+      color: rgba(black, 0.3);
+
+      text-align: center;
+      font-weight: bold;
+      font-size: 13pt;
+      text-shadow: 1px 1px 1px rgba(white, 0.5);
+      @include border-radius(4px); } }
+  &.if-type-mixin:before { content: 'M'; }
+  &.if-type-variable:before { content: 'V'; background: #d0d3de; }
+  &.if-type-section:before { content: 'S'; background: #a99; }
 
   // Heading 1
   h1 {
@@ -143,6 +175,10 @@ body {
     font-weight: 100; }
 
   // Heading
+  h3 {
+    line-height: 1.4;
+    font-family: pt sans, sans-serif; }
+
   h3 em {
     font-weight: normal;
     color: $slate; }
@@ -157,8 +193,16 @@ body {
   h2 {
     margin-top: -5px;
     padding-top: 0;
-    font-size: 2em;
-    margin-bottom: 0.5em; } }
+    font-size: 2em; }
+
+  h2 + p {
+    margin-left: -70px;
+    padding-left: 70px;
+
+    padding-top: 1.5em;
+    border-top: solid 1px #aaa;
+    margin-top: 1em; }
+}
 
 /////////////////////////////////////////////////////////////////////////////
 
