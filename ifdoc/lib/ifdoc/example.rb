@@ -14,6 +14,17 @@ module Ifdoc
       @html = sections[:html]
       @css = sections[:css]
       @js = sections[:js] || sections[:javascript]
+
+      if sections[:html].nil?
+        [:haml].each do |type|
+          if sections[type]
+            @html ||= Tilt.new(type.to_s) { sections[type] }.render
+          end
+        end
+      else
+        @Html = sections[:html]
+      end
+
     end
 
     def html?() ! html.to_s.empty?; end

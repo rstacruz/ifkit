@@ -18,9 +18,9 @@
 //     #{$if-textboxes}.textbox {
 //       @include if-textbox; }
 //
-//     # HTML
-//     <input class='textbox' type='text'>
-//     <input class='textbox' type='text' value='Disabled' disabled>
+//     # HAML
+//     %input.textbox{type: 'text'}
+//     %input.textbox{type: 'text', value: 'Disabled', disabled: true}
 //
 @mixin if-textbox(
   $height              : $if-input-height,
