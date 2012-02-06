@@ -1,4 +1,5 @@
 require 'ifdoc'
+require 'yaml'
 
 module Params
   def extract(what)
@@ -23,7 +24,11 @@ module Ifdoc
     end
 
     def project
-      Project.new config
+      @project = Project.new config
+    end
+
+    def project!
+      @project = nil; project
     end
 
     def config
@@ -39,9 +44,32 @@ module Ifdoc
       Dir['./ifdoc.yml'].first
     end
 
+    def watch!
+      require 'fssm'
+
+      puts "Watching."
+      cli = self
+      FSSM.monitor(Dir.pwd, '**/*') do
+        update { |base, f|
+          unless f.include?('output')
+            print "Updating... "
+            cli.project!.build!
+            puts "Done."
+          end
+        }
+      end
+    end
+
     def run!
-      if ARGV.first_matches 'build'
-        puts "Build?"
+      if ARGV.empty?
+        puts "help"
+      elsif ARGV.first_matches 'watch'
+        watch!
+      elsif ARGV.first_matches 'build'
+        project
+        puts "Building..."
+        project.build!
+        puts "Done. Wrote to #{config['output_path']}."
       end
     end
   end

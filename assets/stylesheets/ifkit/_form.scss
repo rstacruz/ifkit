@@ -159,7 +159,7 @@
   $field-margin: 20px,
   $field: $if-form-field,
   $control-group: $if-form-control-group,
-  $control: $if-form-control,
+  $control: $if-form-control
 ) {
   #{$field} {
     @include if-clearfix;

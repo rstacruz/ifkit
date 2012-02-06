@@ -1,5 +1,9 @@
 module Ifdoc
   module AttrCacheable
+    send :define_method, :clear_attr_cache! do
+      @attr_cache = nil
+    end
+
     def attr_cacheable(*attrs)
       attrs.each do |attr|
 

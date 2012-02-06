@@ -20,7 +20,6 @@ body {
 
 @mixin hilite {
   color: $slate;
-  font-style: italic;
   font-weight: 300;
   background: #fafaf8;
   padding: 1px 2px;
@@ -199,6 +198,7 @@ body {
     font-family: pt sans, sans-serif; }
 
   h3 em {
+    font-style: normal;
     font-weight: normal;
     color: $slate; }
 
