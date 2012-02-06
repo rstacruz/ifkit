@@ -1,13 +1,21 @@
+# Ifdoc configuration file!
+# -------------------------
+
+# Parse these files for documentation comments:
 sources:
  - docsrc/INTRO
  - assets/stylesheets/ifkit/*.scss
 
+# Then use these ase templates:
+css: docsrc/style.scss
+html: docsrc/index.haml
+
+# ...Then build things into this folder.
+output_path: output
+
+# Be sure to pass these options to the SASS engine:
 sass:
   load_paths:
    - assets/stylesheets/
    - docsrc/
 
-css: docsrc/style.scss
-html: docsrc/index.haml
-
-output_path: output

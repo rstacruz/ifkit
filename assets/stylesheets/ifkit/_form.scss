@@ -180,7 +180,7 @@
         float: left;
 
         @include box-sizing(border-box);
-        padding-right: 1em; }
+        padding-right: 1.25em; }
 
       // For control groups (.controls)
       #{$control-group} {
@@ -188,6 +188,9 @@
 
         span.help {
           display: block; } }
+
+      #{$control-group} { > { #{$control} {
+        line-height: $field-height; } } }
 
       // For label+input pairs, horizontal style
       #{$control-group} { &.horizontal > { #{$control} {

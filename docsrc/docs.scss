@@ -33,8 +33,18 @@ body {
     @include hilite; }
 
   dl {
-    // margin-left: -160px;
+    font-size: 0.95em;
+    margin: 0;
+    border-top: solid 1px #ddd;
+    padding: 0.7em 2em 0.5em 2em;
     overflow: hidden; }
+
+  dl:first-of-type {
+    margin-top: 2em; }
+
+  dl:last-of-type {
+    border-bottom: solid 1px #ddd;
+    margin-bottom: 2em; }
 
   dt, dd {
     margin-bottom: 0.5em; }
@@ -48,7 +58,7 @@ body {
     clear: left;
     width: 140px;
     margin-right: 20px;
-    font-size: 0.8em; }
+    font-size: 0.9em; }
 
   dd {
     font-size: 1em;
