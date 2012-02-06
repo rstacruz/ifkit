@@ -11,6 +11,6 @@ $if-form-font-size: 1em !default;
 
 // Selector shortcuts
 $if-textboxes: "input[type=text], input[type=password], input[type=email], input[type=search], input:not([type])";
-$if-fields: "#{$if-textboxes}, select, textarea";
+$if-inputs: "#{$if-textboxes}, select, textarea";
 
 

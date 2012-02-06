@@ -4,7 +4,7 @@
 //@ [Variable] $if-textboxes
 // Alias for the selector that targets all textboxes. Equivalent to
 // `input[type=text], input[type=password],
-// input[type=email], input[type=search]`.
+// input[type=email], input[type=search], input:not([type])`.
 
 @import 'ifkit/settings';
 @import 'compass/css3';
@@ -50,7 +50,7 @@
     border-color: mix($if-accent, rgba(black, $border-opacity), 60%); }
 
   &:focus {
-  @include transition(all 150ms linear);
+    @include transition(all 150ms linear);
     outline: 0;
     border-color: $if-accent;
     @include box-shadow(
@@ -63,6 +63,29 @@
     background: $bg * $disabled-strength;
     text-shadow: 1px 1px 1px rgba(white, 0.4);
     color: $disabled-text-color; } }
+
+//@[Mixin] if-select([ $height, $background-color ])
+//
+//     # HAML
+//     %select.my-select
+//       %option Choose your weapon...
+//
+//     # CSS
+//     .my-select {
+//       @include if-select; }
+//
+@mixin if-select(
+  $height : $if-input-height,
+  $bg     : $if-input-background,
+  $text-color : mix(#888, invert($bg), 40%)
+) {
+
+  height: $height;
+  line-height: $height;
+
+  background: $bg;
+  color: #333;
+  border: solid 1px mix($text-color, $bg, 20%); }
 
 //@[Mixin] if-form-layout([ $label-width, $field-height, $field-margin, $field-selector, $control-group-selector, $control-selector ])
 //
@@ -123,7 +146,7 @@
 @mixin if-form-layout(
   $label-width: 150px,
   $field-height: 32px,
-  $field-margin: 10px,
+  $field-margin: 20px,
   $field: ".field",
   $control-group: ".controls",
   $control: ".control"
@@ -136,17 +159,18 @@
 
     // For checkboxes et al
     input[type=checkbox], input[type=radio] {
-      margin-right: $field-margin; }
+      margin-right: 0.75em; }
 
     > {
       label {
         line-height: $field-height;
+        text-align: right;
         width: $label-width;
         margin-left: -1 * $label-width;
         float: left;
 
         @include box-sizing(border-box);
-        padding-right: $field-margin; }
+        padding-right: 1em; }
 
       // For control groups (.controls)
       #{$control-group} {
@@ -164,7 +188,8 @@
           display: block; }
         } } }
 
-      #{$control-group}, #{$if-textboxes} {
+      // For textboxes
+      #{$control-group}, #{$if-inputs} {
         width: auto;
         @include box-sizing(border-box); } }
   }

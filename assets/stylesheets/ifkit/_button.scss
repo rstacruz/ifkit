@@ -10,14 +10,14 @@
 @import 'ifkit/settings';
 @import 'compass/css3';
 
-//@[Mixin] if-button-primary
-//@[Mixin] if-button-default
+//@[Mixin] if-primary-button
+//@[Mixin] if-default-button
 //
 //     # CSS
 //     .button-1 {
-//       @include if-button-primary; }
+//       @include if-primary-button; }
 //     .button-2 {
-//       @include if-button-default; }
+//       @include if-default-button; }
 //
 //     # HTML
 //     <span class='button-1'>Take the tour</span>
@@ -28,7 +28,7 @@
 // You may override these styles by re-defining them. These are merely built
 // with the other button mixins below.
 //
-@mixin if-button-default {
+@mixin if-default-button {
   @include if-button-color(#eee, 0.9);
   @include if-button-height(24px, 5px 20px);
   @include if-button-radius(2px);
@@ -38,7 +38,7 @@
   font-size: 11pt;
   text-shadow: 1px 1px 1px rgba(white, 0.6); }
 
-@mixin if-button-primary {
+@mixin if-primary-button {
   @include if-button-color(#393, 0.8);
   @include if-button-height(24px, 5px 20px);
   @include if-button-radius(1px);
