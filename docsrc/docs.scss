@@ -44,9 +44,6 @@ body {
 
 /////////////////////////////////////////////////////////////////////////////
 
-body {
-  padding: 40px; }
-
 #if-top {
   position: fixed;
   top: 0;
@@ -78,6 +75,7 @@ body {
     color: #555; } }
 
 #if-content {
+  margin: 40px;
   padding-top: 40px;
   width: 860px; }
 
@@ -102,11 +100,6 @@ body {
 
   font-size: 0.9em;
 
-  h1 {
-    font-size: 1em;
-    margin: 0;
-    padding: 0; }
-
   a {
     color: #888;
     text-shadow: 1px 1px 1px rgba(white, 0.2);
@@ -118,6 +111,9 @@ body {
     margin: 5px 0;
     color: #666;
     font-weight: bold; }
+
+  a.if-level-1 {
+    color: #333; }
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -208,6 +204,7 @@ body {
 
 .if-example {
   margin: 2em 0;
+  position: relative;
 
   .if-result {
     overflow: hidden;
@@ -225,15 +222,38 @@ body {
 
     @include box-shadow(inset 2px 2px 2px rgba(black, 0.05)); }
 
-  .if-result > div {
-    @include normalize; }
-
   pre {
     font-family: monaco, monospace;
     font-size: 0.75em;
 
     overflow-y: hidden;
     overflow-x: auto; }
+
+  button.if-toggle {
+    visibility: hidden;
+
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    z-index: 1;
+
+    border: 0;
+    display: block;
+    background: #ddd;
+    @include border-top-right-radius(4px);
+    @include border-bottom-left-radius(4px);
+    @include box-shadow(-2px 2px 2px rgba(black, 0.2));
+    color: #888;
+
+    font-size: 8pt;
+    text-align: center;
+
+    width: 62px;
+    height: 42px;
+    line-height: 42px; }
+
+  &:hover button.if-toggle {
+    visibility: visible; }
 
   .if-code {
     display: table;
@@ -244,6 +264,9 @@ body {
     border: solid 1px #ddd;
 
     text-shadow: 1px 1px 1px rgba(white, 0.5);
+
+    &.hide {
+      display: none; }
 
     >* {
       display: table-cell;
@@ -260,3 +283,6 @@ body {
 
       color: #888;
       margin: 0 0 10px 0; } } }
+
+.if-result {
+  @include normalize; }

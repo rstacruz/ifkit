@@ -33,7 +33,7 @@ module Ifdoc
 
     def name
       # "Things there (and here)" => "things_there"
-      html.match(/<[hH][123456]>(.*?)<\/h/) && $1.match(/^(.*?)(?:\(.*)?$/) && $1.strip
+      headings.first
     end
 
     def id

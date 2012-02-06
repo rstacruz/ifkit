@@ -1,5 +1,5 @@
-#@[Intro] Interface foundation kit
+#@[Intro] Ifkit
 #
-# Ifkit is a set of convenience mixins for your everyday SASS needs.
+# Ifkit, or Interface Foundation Kit, is a set of convenience mixins for your everyday SASS needs.
 # We've been making the same classes for almost every project we do,
 # so we're moving to standardize that set of controls.

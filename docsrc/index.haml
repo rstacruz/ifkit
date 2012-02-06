@@ -21,8 +21,14 @@
 
           = b.html
 
-    #if-index
-      %h1 Index
+    #if-index{style: 'display: none'}
       - blocks.each do |b|
         - b.headings.each do |h|
           %a{href: "##{b.id}", class: "if-level-#{b.level}"}= h
+
+  %script{:src => 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js'}
+  :javascript
+    $('.if-toggle').live('click', function(e) {
+      e.preventDefault();
+      $(this).closest('.if-example').find('.if-code').toggleClass('hide');
+    });
