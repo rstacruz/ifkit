@@ -37,7 +37,7 @@ module Ifdoc
     end
 
     def id
-      name.scan(/[A-Za-z0-9\-]+/).join('_').downcase
+      name && name.scan(/[A-Za-z0-9\-]+/).join('_').downcase
     end
 
     def headings

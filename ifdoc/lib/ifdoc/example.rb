@@ -12,8 +12,8 @@ module Ifdoc
 
     def initialize(sections)
       @html = sections[:html]
-      @css = sections[:css]
-      @js = sections[:js] || sections[:javascript]
+      @css = sections[:css].to_s.strip
+      @js = (sections[:js] || sections[:javascript]).to_s.strip
 
       if sections[:html].nil?
         [:haml].each do |type|
