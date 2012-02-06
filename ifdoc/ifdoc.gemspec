@@ -16,4 +16,5 @@ Gem::Specification.new do |s|
   s.add_dependency "sass"
   s.add_dependency "redcarpet", ">= 2.0"
   s.add_dependency "nokogiri"
+  s.add_dependency "tilt"
 end
