@@ -149,11 +149,6 @@
 //@[Mixin] if-button-radius($left, [ $right ])
 //@[Mixin] if-button-shadow($shadow)
 //
-// Mixins to enhance `if-button-color`.
-//
-// It is encouraged for you to make your own mixins using `if-button-color`
-// and these, just like the example below.
-//
 //     # CSS
 //     .button-pill {
 //       @include if-button-color(#eee, 0.9);
@@ -166,6 +161,11 @@
 //
 //     # HTML
 //     <span class='button-pill'>Pill button</span>
+//
+// Mixins to enhance `if-button-color`.
+//
+// It is encouraged for you to make your own mixins using `if-button-color`
+// and these, just like the example below.
 //
 @mixin if-button-height($height: 24px, $padding: 4px 10px) {
   height: $height;

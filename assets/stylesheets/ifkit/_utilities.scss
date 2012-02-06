@@ -29,6 +29,25 @@
 }
 
 //@[Mixin] if-non-list([$ul-display, $li-display])
+//
+//     # CSS
+//     ul.non-list {
+//       @include if-non-list;
+//
+//       & {
+//         background: #555;
+//         color: #fff;
+//         padding: 5px; }
+//
+//       >li {
+//         padding: 0 10px; } }
+//
+//     # HAML
+//     %ul.non-list
+//       %li Home
+//       %li About
+//       %li Contact
+//
 // Resets a `<ul>`s styles. If either `$ul-display` or `$li-display` are given,
 // their respective elements will get that as a display property.
 //
