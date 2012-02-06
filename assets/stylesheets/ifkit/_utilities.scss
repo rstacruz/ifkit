@@ -56,9 +56,6 @@
 }
 
 //@[Mixin] if-center-list
-// Works like `if-horiz-list`, but centers the list items. Perfect for
-// horizontal menus that are centered.  Be sure to `overflow: hidden` the
-// container!
 //
 //     # CSS
 //     div.centered-list {
@@ -79,6 +76,10 @@
 //         %li Home
 //         %li About
 //         %li Contact
+//
+// Works like `if-horiz-list`, but centers the list items. Perfect for
+// horizontal menus that are centered.  Be sure to `overflow: hidden` the
+// container!
 //
 @mixin if-center-list {
   @include if-non-list;

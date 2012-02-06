@@ -13,11 +13,6 @@
 //@[Mixin] if-button-primary
 //@[Mixin] if-button-default
 //
-// Ifkit comes with a few default button styles.
-//
-// You may override these styles by re-defining them. These are merely built
-// with the other button mixins below.
-//
 //     # CSS
 //     .button-1 {
 //       @include if-button-primary; }
@@ -27,7 +22,12 @@
 //     # HTML
 //     <span class='button-1'>Take the tour</span>
 //     <span class='button-2'>Cancel</span>
-
+//
+// Ifkit comes with a few default button styles.
+//
+// You may override these styles by re-defining them. These are merely built
+// with the other button mixins below.
+//
 @mixin if-button-default {
   @include if-button-color(#eee, 0.9);
   @include if-button-height(24px, 5px 20px);
@@ -49,6 +49,16 @@
   text-shadow: 1px 1px 1px #393 * 0.6; }
 
 //@[Mixin] if-button-color($color, [ $strength, $border-strength, $hover-strength, $active-strength, $highlight-opacity ])
+//
+//     # CSS
+//     .button-red {
+//       @include if-button-color(#d33, 0.5, 1.1, 0.8, 0.8, 0.2); }
+//     .button-red-flat {
+//       @include if-button-color(#d33, 1.0, 1.1, 0.9, 0.8, 0.2); }
+//
+//     # HTML
+//     <span class='button-red'>Red button</span>
+//     <span class='button-red-flat'>Flat button</span>
 //
 // You may specify additional parameters. All parameters except `$color` are
 // optional.
@@ -74,16 +84,6 @@
 //   $highlight-opacity ::
 //   Opacity for the highlight. `0.0` makes it invisible, `1.0` makes it
 //   completely white.
-//
-//     # CSS
-//     .button-red {
-//       @include if-button-color(#d33, 0.5, 1.1, 0.8, 0.8, 0.2); }
-//     .button-red-flat {
-//       @include if-button-color(#d33, 1.0, 1.1, 0.9, 0.8, 0.2); }
-//
-//     # HTML
-//     <span class='button-red'>Red button</span>
-//     <span class='button-red-flat'>Flat button</span>
 //
 @mixin if-button-color(
   $bg,

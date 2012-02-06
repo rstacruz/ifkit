@@ -213,9 +213,9 @@ body {
     background: #fafafa;
     @include border-top-radius(4px);
     border: solid 1px #ddd;
+    padding: 20px;
 
     @include box-sizing(border-box);
-    padding: 20px;
 
     position: relative;
     z-index: 0;
@@ -227,7 +227,13 @@ body {
     font-size: 0.75em;
 
     overflow-y: hidden;
-    overflow-x: auto; }
+    overflow-x: auto;
+
+    white-space: pre;
+    word-wrap: normal;
+    width: auto;
+
+    padding: 20px; }
 
   button.if-toggle {
     visibility: hidden;
@@ -272,17 +278,17 @@ body {
       display: table-cell;
       width: 50%;
 
-      @include box-sizing(border-box);
-      padding: 10px 20px; }
+      @include box-sizing(border-box); }
 
     >*:first-child {
       border-right: solid 1px #ddd; }
 
     >* h3 {
       font-size: 0.8em;
+      padding: 20px 20px 0 20px;
 
       color: #888;
-      margin: 0 0 10px 0; } } }
+      margin: 0 0 0 0; } } }
 
 .if-result {
   @include normalize; }

@@ -11,16 +11,17 @@
 
 //@ [Mixin] if-textbox
 //
-// Textbox. Includes styles for disabled, hover, focus, et al. Works great
-// for `<input>` and `<textarea>` alike.
-//
 //     # CSS
-//     #{$if-textboxes}.textbox {
-//       @include if-textbox; }
+//     #{$if-textboxes} {
+//       &.textbox {
+//         @include if-textbox; } }
 //
 //     # HAML
 //     %input.textbox{type: 'text'}
 //     %input.textbox{type: 'text', value: 'Disabled', disabled: true}
+//
+// Textbox. Includes styles for disabled, hover, focus, et al. Works great
+// for `<input>` and `<textarea>` alike.
 //
 @mixin if-textbox(
   $height              : $if-input-height,
@@ -62,3 +63,109 @@
     background: $bg * $disabled-strength;
     text-shadow: 1px 1px 1px rgba(white, 0.4);
     color: $disabled-text-color; } }
+
+//@[Mixin] if-form-layout([ $label-width, $field-height, $field-margin, $field-selector, $control-group-selector, $control-selector ])
+//
+//     # HAML
+//     %form.my-form
+//       .field
+//         %label Username:
+//         %input{type: 'text'}
+//       .field
+//         %label Email:
+//         .controls
+//           %input{type: 'text'}
+//           %span.help We will never sell your email address.
+//       .field
+//         %label Gender:
+//         .controls
+//           .control
+//             %input{type: 'radio'}
+//             %label Male
+//           .control
+//             %input{type: 'radio'}
+//             %label Female
+//       .field
+//         %label Full name:
+//         .controls.horizontal
+//           .control
+//             %input{type: 'text'}
+//             %label First name
+//           .control
+//             %input{type: 'text'}
+//             %label Last name
+//
+//     # CSS
+//     form.my-form {
+//       @include if-form-layout;
+//
+//       #{$if-textboxes} {
+//         @include if-textbox; } }
+//
+// Gives fields in a side-by-side layout. Does not give any visual style to any
+// of the elements, it simply gives them layout. This is often used on `fieldset`
+// or `form`. You may specify some selectors:
+//
+//   $field-selector ::
+//   The field. Defaults to `.field`. (Tip: set to `>*` to be all-inclusive.)
+//
+//   $control-group-selector ::
+//   Selector for a group of controls to group many controls in a field, say,
+//   radio buttons. Defaults to `.controls`.
+//
+//   $control-selector ::
+//   Selector for a control+label pair's parent for multi-textbox fields (See
+//   "Full name" in the example). Defaults to `.control`.
+//
+// You can add `.horizontal` (see "Full name" in the example) to the field
+// control group to lay out its controls horizontally.
+//
+@mixin if-form-layout(
+  $label-width: 150px,
+  $field-height: 32px,
+  $field-margin: 10px,
+  $field: ".field",
+  $control-group: ".controls",
+  $control: ".control"
+) {
+  #{$field} {
+    @include if-clearfix;
+    margin: $field-margin 0;
+    min-height: $field-height;
+    padding: 0 0 0 $label-width;
+
+    // For checkboxes et al
+    input[type=checkbox], input[type=radio] {
+      margin-right: $field-margin; }
+
+    > {
+      label {
+        line-height: $field-height;
+        width: $label-width;
+        margin-left: -1 * $label-width;
+        float: left;
+
+        @include box-sizing(border-box);
+        padding-right: $field-margin; }
+
+      // For control groups (.controls)
+      #{$control-group} {
+        display: block;
+
+        span.help {
+          display: block; } }
+
+      // For label+input pairs, horizontal style
+      #{$control-group} { &.horizontal > { #{$control} {
+        float: left;
+        margin-right: $field-margin;
+
+        label {
+          display: block; }
+        } } }
+
+      #{$control-group}, #{$if-textboxes} {
+        width: auto;
+        @include box-sizing(border-box); } }
+  }
+}

@@ -9,6 +9,8 @@ $if-input-shadow: inset 1px 2px 3px rgba(black, 0.075) !default;
 
 $if-form-font-size: 1em !default;
 
-// LOL
-$if-textboxes: "input[type=text], input[type=password], input[type=email], input[type=search]"
+// Selector shortcuts
+$if-textboxes: "input[type=text], input[type=password], input[type=email], input[type=search], input:not([type])";
+$if-fields: "#{$if-textboxes}, select, textarea";
+
 

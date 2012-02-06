@@ -28,7 +28,9 @@
 
   %script{:src => 'http://cdnjs.cloudflare.com/ajax/libs/jquery/1.7/jquery.min.js'}
   :javascript
-    $('.if-toggle').live('click', function(e) {
-      e.preventDefault();
-      $(this).closest('.if-example').find('.if-code').toggleClass('hide');
-    });
+    if (typeof $ !== 'undefined') {
+      $('.if-toggle').live('click', function(e) {
+        e.preventDefault();
+        $(this).closest('.if-example').find('.if-code').toggleClass('hide');
+      });
+    }
