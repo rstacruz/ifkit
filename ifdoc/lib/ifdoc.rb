@@ -1,5 +1,6 @@
 module Ifdoc
   require 'ifdoc/attr_cacheable'
+  require 'ifdoc/config'
   require 'ifdoc/project'
   require 'ifdoc/extractor'
   require 'ifdoc/comment_block'

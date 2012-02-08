@@ -17,8 +17,10 @@ module Ifdoc
     attr_reader :files
 
     def initialize(config)
-      @config = config
-      @files = config['sources'].map { |path| Dir[path] }.flatten.compact.uniq
+      @config = Config.new(config)
+      @config.validate!
+
+      @files = @config.sources.map { |path| Dir[path] }.flatten.compact.uniq
     end
 
     def root
@@ -43,7 +45,7 @@ module Ifdoc
     end
 
     def html
-      Tilt.new(@config['html']).render(self, {
+      Tilt.new(@config.html).render(self, {
         :css => css,
         :blocks => blocks,
         :project => self
@@ -62,17 +64,20 @@ module Ifdoc
 
     # scss or sass?
     def css_format
-      File.extname(@config['css'])[1..-1]
+      File.extname(@config.css)[1..-1]
     end
 
     def html_format
-      File.extname(@config['html'])[1..-1]
+      File.extname(@config.html)[1..-1]
     end
 
     def css_options
       opts = Compass.sass_engine_options
-      paths = @config['sass']['load_paths']
+      paths = Array.new
+      paths += @config.sass.load_paths  if @config.sass? && @config.sass.load_paths?
+      paths += [Ifdoc.root('data', 'sass')]
       paths += opts[:load_paths]
+
       { :load_paths => paths, :style => :compact }
     end
 
@@ -83,7 +88,7 @@ module Ifdoc
 
     # The CSS header based on the given css file
     def css_header
-      File.read(@config['css'])
+      File.read(@config.css)
     end
 
     def build!
@@ -93,7 +98,7 @@ module Ifdoc
 
   private
     def output_path(*a)
-      File.join @config['output_path'], *a
+      File.join @config.output_path, *a
     end
   end
 end

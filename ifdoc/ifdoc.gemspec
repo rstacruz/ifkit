@@ -18,4 +18,5 @@ Gem::Specification.new do |s|
   s.add_dependency "nokogiri"
   s.add_dependency "tilt"
   s.add_dependency "fssm"
+  s.add_dependency "hashr"
 end

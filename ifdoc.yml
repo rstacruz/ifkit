@@ -25,4 +25,3 @@ sass:
   load_paths:
    - assets/stylesheets/
    - docsrc/
-
