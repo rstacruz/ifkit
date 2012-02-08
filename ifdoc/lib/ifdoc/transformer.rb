@@ -48,7 +48,7 @@ module Ifdoc
         sections = split_lines(lines)
         example  = Example.new sections
         @examples.push example
-        template = Tilt.new(Ifdoc.root('data', 'example.haml'))
+        template = Tilt.new(Ifdoc.root('data', 'templates', 'example.haml'))
 
         pre.after(template.render(example))
         pre.remove

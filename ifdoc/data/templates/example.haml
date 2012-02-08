@@ -1,0 +1,20 @@
+%section.if-example
+
+  %div.if-result
+    %button.if-toggle
+      Source
+
+    %div
+      != html
+
+  %div.if-code.hide
+
+    - if html?
+      %div.if-html
+        %h3 HTML
+        %pre.prettyprint.lang-html~ html_escape(html).gsub("\n", '<br>')
+
+    - if css?
+      %div.if-css
+        %h3 CSS
+        %pre.prettyprint.lang-c~ html_escape(css).gsub("\n", '<br>')
