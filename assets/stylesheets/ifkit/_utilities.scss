@@ -1,15 +1,18 @@
+// Ifkit / http://ricostacruz.com/ifkit
+// ------------------------------------
+
 //@[Group] Utilities
 //
 
 @import 'compass/css3';
 
-//@[Mixin] if-gradient($start-color, $end-color)
+//@[Mixin] if-gradient($top, $bottom)
 // Works like `linear-gradient`, but assumes that it's always vertical and has
 // a `background-color` fallback.
 //
-@mixin if-gradient($start, $end) {
-  background-color: $start;
-  @include background(linear-gradient(top, $start, $end));
+@mixin if-gradient($top, $bottom) {
+  background-color: $top;
+  @include background(linear-gradient(top, $top, $bottom));
 }
 
 //@[Mixin] if-clearfix
@@ -28,9 +31,9 @@
     zoom: 1; }
 }
 
-//@[Mixin] if-non-list([$ul-display, $li-display])
+//@[Mixin] if-non-list([ $ul: block, $li: inline ])
 //
-// Resets a `<ul>`s styles. If either `$ul-display` or `$li-display` are given,
+// Resets a `<ul>`s styles. If either `$ul` or `$li` are given,
 // their respective elements will get that as a display property.
 //
 @mixin if-non-list($ul: block, $li: inline) {

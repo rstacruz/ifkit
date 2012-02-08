@@ -1,0 +1,135 @@
+// Ifkit / http://ricostacruz.com/ifkit
+// ------------------------------------
+
+//@[Group] Notch
+// For tooltips and things that have triangles sticking out of them.
+
+//@[Mixin] if-notch([ $direction: top, $color, $size, $border, $shadow ])
+//
+//     # CSS
+//     .inotch.top {
+//       @include if-notch(top, #888); }
+//     .inotch.left {
+//       @include if-notch(left, #888); }
+//     .inotch.bottom {
+//       @include if-notch(bottom, #888); }
+//     .inotch.right {
+//       @include if-notch(right, #888); }
+//
+//     .inotch {
+//       margin: 3px;
+//       float: left;
+//       outline: dotted 1px red; }
+//
+//     # HAML
+//     %span.inotch.top
+//     %span.inotch.left
+//     %span.inotch.bottom
+//     %span.inotch.right
+//
+// Makes a free, notch triangle shape that has `display: block`.
+//
+@mixin if-notch(
+  $direction: top,
+  $color: #fafaf0,
+  $size: 10px,
+  $border: none,
+  $shadow: none
+) {
+  // The bigger dimension. (eg, 'width' in a direction=top)
+  $size2: $size * 2.3846;
+
+  & {
+    display: block;
+    overflow: hidden;
+    // position: absolute;
+    // top: -13px;
+    // right: 45px;
+    @if ($direction == top) or ($direction == bottom) {
+      width: $size2;
+      height: $size; }
+
+    @else {
+      width: $size;
+      height: $size2; } }
+
+  &:before {
+    content: '';
+    background: $color;
+    width: $size2 * 0.6452; //20px
+    height: $size2 * 0.6452;
+    display: block;
+    @include transform(rotate(45deg));
+
+    @if $shadow != none {
+      @include box-shadow($shadow); }
+
+    @if $border != none {
+      border: $border; }
+
+    position: relative;
+
+    @if $direction == top {
+      top: $size2 * 0.1613; // 5px
+      left: $size2 * 0.1613; } // 5px
+
+    @if $direction == bottom {
+      top: $size2 * -0.4193; // -13px
+      left: $size2 * 0.1613; } // 5px
+
+    @if $direction == left {
+      top: $size2 * 0.1613; // 5px
+      left: $size2 * 0.1935; } // 6px
+
+    @if $direction == right {
+      top: $size2 * 0.1613; // 5px
+      left: $size2 * -0.4193; } // 6px
+} }
+
+//@[Mixin] if-box-notch([ $from, $align ])
+//@[Mixin] if-box-notch([ $from, $align, ... ])
+//
+//     # CSS
+//     .notched {
+//       width: 200px;
+//       height: 50px;
+//       background: #888;
+//       color: #ddd;
+//       padding: 10px;
+//       position: relative;
+//       .notch {
+//         @include if-box-notch(top, left, $color: #888) } }
+//
+//     # HAML
+//     .notched
+//        .notch
+//        Hello.
+//
+// Gives a box a notch. Give it to the notch sub-element of the box.
+//
+// Note: ensure that the parent box has a `position` property, even if it's
+// just `position: relative`.
+//
+@mixin if-box-notch(
+  $from: top,
+  $align: left,
+  $offset: 10px,
+  $inset: 0,
+
+  $color: #fafaf0,
+  $size: 10px,
+  $border: none,
+  $shadow: none
+) {
+  @include if-notch(
+    $direction: $from,
+    $color: $color,
+    $size: $size,
+    $border: $border,
+    $shadow: $shadow);
+
+  position: absolute;
+
+  // top: -10px, left: 10px
+  #{$from}: -1 * $size + $inset;
+  #{$align}: $offset; }

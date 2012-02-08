@@ -19,7 +19,7 @@ namespace :doc do
       update { |base, f|
         unless f.include?('output')
           puts "Building..."
-          system "rake doc:build --trace"
+          system "rake doc:build"
         end
       }
     end

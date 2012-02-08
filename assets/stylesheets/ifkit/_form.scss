@@ -50,7 +50,8 @@
   &:not(:disabled):hover {
     border-color: mix($if-accent, rgba(black, $border-opacity), 60%); }
 
-  &:focus {
+  // We also include &.focus to make it possible to make pseudo-textbox elements.
+  &:focus, &.focus {
     @include transition(all 150ms linear);
     outline: 0;
     border-color: $if-accent;
@@ -59,13 +60,13 @@
       0 0 8px rgba($if-accent, 0.5),
       0 0 4px rgba($if-accent, 0.5)); }
 
-  &:disabled {
+  &:disabled, &.disabled {
     cursor: not-allowed;
     background: $bg * $disabled-strength;
     text-shadow: 1px 1px 1px rgba(white, 0.4);
     color: $disabled-text-color; } }
 
-//@[Mixin] if-select([ $height, $background-color ])
+//@[Mixin] if-select([ $height, $bg, $text-color ])
 //
 //     # HAML
 //     %select.my-select
@@ -79,37 +80,50 @@
 //       @include if-select; }
 //
 @mixin if-select(
-  $height : $if-input-height,
-  $bg     : $if-input-background,
-  $text-color : mix(#888, invert($bg), 40%)
+  $height              : $if-input-height,
+  $bg                  : $if-input-background,
+  $text-color          : mix(#888, invert($bg), 40%),
+  $disabled-strength   : 0.97,
+  $disabled-text-color : mix(#888, $bg, 70%)
 ) {
-  $disabled-strength: 0.97;
-  $disabled-text-color: mix(#888, $bg, 70%);
 
   height: $height;
   line-height: $height;
 
+  @include box-sizing(border-box);
+
+  // To restyle select boxes in Webkits, we need to define border + bg + color.
   background: $bg;
-  color: #333;
+  color: $text-color;
   border: solid 1px mix($text-color, $bg, 20%);
+
+  // For Firefox, some padding makes it look better.
+  padding: 5px;
+  @include border-radius(2px);
+  @include box-sizing(border-box);
 
   &:disabled {
     background: $bg * $disabled-strength;
     color: $disabled-text-color; } }
 
-//@[Mixin] if-form-layout([ $label-width, $field-height, $vertical-margin, $horiz-margin, $radio-height, $field-selector, $control-group-selector, $control-selector ])
+//@[Mixin] if-form-layout([ $label-width, $field-height, $vertical-margin, $horiz-margin, $radio-height, $field, $control-group, $control ])
 //
 //     # HAML
 //     %form.my-form
-//       .field
+//       / Basic fields are simply label+input pairs.
+//       %fieldset
 //         %label Username:
 //         %input{type: 'text'}
-//       .field
+//       / For most cases, you will want to wrap
+//       / the controls inside `.controls`.
+//       %fieldset
 //         %label Email:
 //         .controls
 //           %input{type: 'text'}
 //           %span.help We will never sell your email address.
-//       .field.radio
+//       / Radio button fields have class='radio'
+//       / to reduce the line height.
+//       %fieldset.radio
 //         %label Gender:
 //         .controls
 //           .control
@@ -118,7 +132,8 @@
 //           .control
 //             %input{type: 'radio'}
 //             %label Female
-//       .field
+//       / Horizontal layouts have class='horizontal'.
+//       %fieldset
 //         %label Full name:
 //         .controls.horizontal
 //           .control
@@ -130,7 +145,10 @@
 //
 //     # CSS
 //     form.my-form {
-//       @include if-form-layout;
+//       @include if-form-layout($field: 'fieldset');
+//
+//       fieldset {
+//         border: 0; }
 //
 //       #{$if-textboxes} {
 //         @include if-textbox; } }
@@ -139,16 +157,21 @@
 // of the elements, it simply gives them layout. This is often used on `fieldset`
 // or `form`. You may specify some selectors:
 //
-//   $field-selector ::
-//   The field. Defaults to `.field`. (Tip: set to `>*` to be all-inclusive.)
+//   $field ::
+//   The field selector. Defaults to `.field`.
 //
-//   $control-group-selector ::
+//   $control-group ::
 //   Selector for a group of controls to group many controls in a field, say,
 //   radio buttons. Defaults to `.controls`.
 //
-//   $control-selector ::
+//   $control ::
 //   Selector for a control+label pair's parent for multi-textbox fields (See
 //   "Full name" in the example). Defaults to `.control`.
+//
+// Common settings:
+//
+//  * You can use nested fieldsets using `fieldset` for $field.
+//  * You can use `>*` for $field as well.
 //
 // You can add `.horizontal` (see "Full name" in the example) to the field
 // control group to lay out its controls horizontally.
@@ -206,20 +229,22 @@
           display: block; } }
 
       // For label+input pairs, horizontal style.
-      // Compensate for the margins in the individual elements.
-      #{$control-group} { &.horizontal {
+      #{$control-group} {
+        &.horizontal {
+          // Compensate for the margins in the individual elements.
           @include if-clearfix;
           margin-right: -1 * $horiz-margin;
-          margin-bottom: -1 * $horiz-margin; } }
+          margin-bottom: -1 * $horiz-margin; }
 
-      #{$control-group} { &.horizontal > { #{$control} {
-        float: left;
-        @include box-sizing(border-box);
-        padding-right: $horiz-margin;
-        margin-bottom: $horiz-margin;
+        &.horizontal > {
+          #{$control} {
+            float: left;
+            @include box-sizing(border-box);
+            padding-right: $horiz-margin;
+            margin-bottom: $horiz-margin;
 
-        > { #{$if-inputs} {
-          width: 100%; } }
+            > { #{$if-inputs} {
+              width: 100%; } }
 
         label {
           display: block; } } } }
@@ -286,12 +311,9 @@
 
 @mixin if-form-widths(
   $field: $if-form-field,
-  $control-group: $if-form-control-group,
   $control: $if-form-control
 ) {
-  #{$field} {
-    #{$control}, #{$if-inputs} {
-      @include if-control-widths;
-    }
+  #{$control}, #{$if-inputs} {
+    @include if-control-widths;
   }
 }

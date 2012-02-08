@@ -3,6 +3,7 @@
 
 @import 'prettify';
 
+$bg: #fcfcfc;
 $slate: #707090;
 $scrollbar-image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NDZEMERCMUZGRUI2MTFERkIwQ0RGMkFBNEE3NDlCOUMiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NDZEMERCMjBGRUI2MTFERkIwQ0RGMkFBNEE3NDlCOUMiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo0NkQwREIxREZFQjYxMURGQjBDREYyQUE0QTc0OUI5QyIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo0NkQwREIxRUZFQjYxMURGQjBDREYyQUE0QTc0OUI5QyIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PpHo8kwAAACBSURBVHjaYvz//z8DJYCJgUJAsQEsyBxGRkYwBcS6QKwBxLJQqcdAfAOILwPxf2RvM6JwICbYA7EDDgsPAPFBZBPQvaCLRzMDVE4XXxhoEOFtDXwGyBJhgCxNo/ExEXoe4zPgBhEG3MBnwGVoVDHgicbLKGkHLR1QlpCGZmYCCDAAxuMoE4WhhWUAAAAASUVORK5CYII=";
 
@@ -16,6 +17,7 @@ $scrollbar-image: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAA
     -webkit-border-image: url($scrollbar-image) 7 7 7 7 round round; } }
 
 body {
+  background-color: $bg;
   font: 300 11pt/1.5 'helvetica neue', sans-serif; }
 
 @mixin hilite {
@@ -65,11 +67,22 @@ body {
 
 /////////////////////////////////////////////////////////////////////////////
 
+body {
+  &:after {
+    content: '';
+    position: fixed;
+    z-index: 31336;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px;
+    @include background(linear-gradient(top, rgba($bg, 1.0) 50%, rgba($bg, 0.0))); } }
+
 #if-top {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 10px;
+  left: 10px;
+  right: 10px;
   z-index: 31337;
 
   height: 40px;
@@ -82,8 +95,10 @@ body {
   text-shadow: 1px 1px 1px rgba(black, 0.3);
   font-size: 10pt;
 
-  border-top: solid 2px #555;
   border-bottom: solid 1px #ccc;
+
+  @include border-radius(4px);
+
   @include box-shadow(0 5px 3px -4px rgba(black, 0.1));
   text-shadow: 1px 1px 1px rgba(white, 0.2);
 
