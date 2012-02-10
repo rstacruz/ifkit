@@ -10,18 +10,22 @@ sources:
 # Note that you must include the stylesheets above yourself, manually, in this sheet.
 css: docsrc/style.scss
 
-# For the documentation, build an HTML document out of this file.
-html: docsrc/index.haml
-
 # ...Then build things into this folder.
 output_path: output
 
-# If you need to copy assets to the output folder:
-# copy:
-#   docsrc/images: images
+# Optional config
+# ---------------
 
 # Pass these options to the SASS engine.
 sass:
   load_paths:
    - assets/stylesheets/
    - docsrc/
+
+# For the documentation, build an HTML document out of this file.
+# html: docsrc/index.haml
+
+# If you need to copy assets to the output folder:
+# copy:
+#   docsrc/images: images
+

@@ -1,7 +1,7 @@
-@import 'normalize';
+@import 'ifdoc/normalize';
 @include normalize;
 
-@import 'prettify';
+@import 'ifdoc/prettify';
 
 $bg: #fcfcfc;
 $slate: #707090;
