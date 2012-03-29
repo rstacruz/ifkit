@@ -24,4 +24,9 @@ namespace :doc do
       }
     end
   end
+
+  task :deploy => :build do
+    repo = ENV['to'] || 'rstacruz/ifkit'
+    system "git-update-ghpages #{repo} -i output"
+  end
 end
