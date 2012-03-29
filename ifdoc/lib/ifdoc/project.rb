@@ -28,12 +28,16 @@ module Ifdoc
     end
 
     def name
-      blocks.first.name
+      blocks.first ? blocks.first.name : ''
     end
 
     def comment_blocks
       @files.map { |fn|
-        Extractor.new(fn).blocks
+        if File.extname(fn) == '.md'
+          MarkdownExtractor.new(fn).blocks
+        else
+          Extractor.new(fn).blocks
+        end
       }.flatten.compact
     end
 

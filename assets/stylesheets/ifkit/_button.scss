@@ -94,7 +94,9 @@
   $border-strength: 0.8,
   $hover-strength: 1.02,
   $active-strength: 0.9,
-  $highlight_opacity: 0.25
+  $hover-border-strength: $strength,
+  $active-border-strength: $hover-border-strength,
+  $highlight-opacity: 0.25
 ) {
   $hover_bg:  $bg * $hover-strength;
   $active_bg: $bg * $active-strength;
@@ -110,16 +112,16 @@
     background-color: $bg;
     @include background(linear-gradient($bg, $bg * $strength));
     @include box-shadow(
-      inset 0 1px 0 rgba(white, $highlight_opacity),
-      inset 1px 0 0 rgba(white, $highlight_opacity * 0.6));
+      inset 0 1px 0 rgba(white, $highlight-opacity),
+      inset 1px 0 0 rgba(white, $highlight-opacity * 0.6));
 
     position: relative; }
 
-  &:hover {
+  &:hover, &.hover {
     background-color: $hover_bg;
     @include background(linear-gradient($hover_bg, $hover_bg * $strength)); }
 
-  &:active {
+  &:active, &.active {
     background: $active_bg;
     @include box-shadow(inset 1px 1px 5px rgba(black, 1.5 * (1.0 - $strength))); }
 
@@ -128,7 +130,8 @@
 
   @if $border-strength != none {
     $border_bg: $bg * $border-strength;
-    $border_hover_bg: $border_bg * $strength;
+    $border_hover_bg: $border_bg * $hover-border-strength;
+    $border_active_bg: $border_bg * $active-border-strength;
 
     // Border
     &:before {
@@ -144,9 +147,13 @@
       background-color: $border_bg;
       @include background(linear-gradient(top, $border_bg, $border_bg * $strength)); }
 
-    &:hover:before {
+    &:hover:before, &.hover:before {
       background-color: $border_hover_bg;
-      @include background(linear-gradient(top, $border_hover_bg, $border_hover_bg * $strength)); } } }
+      @include background(linear-gradient(top, $border_hover_bg, $border_hover_bg * $strength)); }
+
+    &:active:before, &.active:before {
+      background-color: $border_active_bg;
+      @include background(linear-gradient(top, $border_active_bg, $border_active_bg * $strength)); } } }
 
 //@[Mixin] if-button-height($height, [ $padding ])
 //@[Mixin] if-button-radius($left, [ $right ])
