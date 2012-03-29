@@ -111,19 +111,19 @@
 //     # HAML
 //     %form.my-form
 //       / Basic fields are simply label+input pairs.
-//       %fieldset
+//       .field
 //         %label Username:
 //         %input{type: 'text'}
 //       / For most cases, you will want to wrap
 //       / the controls inside `.controls`.
-//       %fieldset
+//       .field
 //         %label Email:
 //         .controls
 //           %input{type: 'text'}
 //           %span.help We will never sell your email address.
 //       / Radio button fields have class='radio'
 //       / to reduce the line height.
-//       %fieldset.radio
+//       .field
 //         %label Gender:
 //         .controls
 //           .control
@@ -133,7 +133,7 @@
 //             %input{type: 'radio'}
 //             %label Female
 //       / Horizontal layouts have class='horizontal'.
-//       %fieldset
+//       .field
 //         %label Full name:
 //         .controls.horizontal
 //           .control
@@ -145,7 +145,7 @@
 //
 //     # CSS
 //     form.my-form {
-//       @include if-form-layout($field: 'fieldset');
+//       @include if-form-layout($field: '.field');
 //
 //       fieldset {
 //         border: 0; }
