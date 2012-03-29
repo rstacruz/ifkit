@@ -12,8 +12,7 @@
 //
 @mixin if-gradient($top, $bottom) {
   background-color: $top;
-  @include background(linear-gradient(top, $top, $bottom));
-}
+  @include background(linear-gradient(top, $top, $bottom)); }
 
 //@[Mixin] if-clearfix
 // Cross-browser PIE clear fix.
