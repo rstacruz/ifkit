@@ -134,7 +134,7 @@
     $border_active_bg: $border_bg * $active-border-strength;
 
     // Border
-    &:before {
+    &:after {
       content: '';
       display: block;
       position: absolute;
@@ -147,11 +147,11 @@
       background-color: $border_bg;
       @include background(linear-gradient(top, $border_bg, $border_bg * $strength)); }
 
-    &:hover:before, &.hover:before {
+    &:hover:after, &.hover:after {
       background-color: $border_hover_bg;
       @include background(linear-gradient(top, $border_hover_bg, $border_hover_bg * $strength)); }
 
-    &:active:before, &.active:before {
+    &:active:after, &.active:after {
       background-color: $border_active_bg;
       @include background(linear-gradient(top, $border_active_bg, $border_active_bg * $strength)); } } }
 
@@ -193,7 +193,7 @@
     & {
       @include border-left-radius($left); }
 
-    &:before {
+    &:after {
       @include border-left-radius($left_outer); } }
 
   @if $right != none {
@@ -203,10 +203,10 @@
     & {
       @include border-right-radius($right); }
 
-    &:before {
+    &:after {
       @include border-right-radius($right_outer); } } }
 
 @mixin if-button-shadow($shadow: 1px 1px 1px rgba(black, 0.1)) {
-  &:before {
+  &:after {
     @include box-shadow($shadow); } }
 

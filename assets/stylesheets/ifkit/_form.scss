@@ -150,7 +150,7 @@
 //       fieldset {
 //         border: 0; }
 //
-//       #{$if-textboxes} {
+//       #{$if-textboxes}, textarea {
 //         @include if-textbox; } }
 //
 // Gives fields in a side-by-side layout. Does not give any visual style to any
