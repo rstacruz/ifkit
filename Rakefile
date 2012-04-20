@@ -1,6 +1,8 @@
 $:.unshift File.expand_path('../ifdoc/lib', __FILE__)
 
 namespace :doc do
+  desc "Builds documentation in output/."
+
   task :build do
     require 'ifdoc'
     require 'yaml'
@@ -11,6 +13,7 @@ namespace :doc do
     puts "Wrote to output/index.html."
   end
 
+  desc "Rebuilds documentation as files change."
   task :watch do
     require 'fssm'
 
@@ -25,6 +28,7 @@ namespace :doc do
     end
   end
 
+  desc "Deploys documentation to GitHub pages."
   task :deploy => :build do
     repo = ENV['to'] || 'rstacruz/ifkit'
     system "git-update-ghpages #{repo} -i output"
