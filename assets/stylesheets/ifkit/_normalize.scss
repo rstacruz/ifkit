@@ -1,6 +1,10 @@
 // Ifkit / http://ricostacruz.com/ifkit
 // ------------------------------------
 
+@import 'compass/css3';
+
+$blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
+
 //@ [Group] Normalize
 //
 // Mixin for normalizing.
@@ -22,8 +26,19 @@
 //         %li Hello
 //
 // Normalizes typography for content areas.
-
-@mixin if-content {
+//
+// You may specify additional parameters.
+//
+//   $vertical-margin ::
+//   Margin in between things. Defaults to `20px`.
+//
+//   $indent ::
+//   Indentation for lists, blockquotes and such. Defaults to `25px`.
+//
+@mixin if-content(
+  $vertical-margin: 20px,
+  $indent: 25px
+) {
   table {
     border-collapse: collapse;
     border-spacing: 0; }
@@ -64,7 +79,8 @@
 
   // Blockquote
   blockquote {
-    margin: 1em 40px; }
+    margin-riht: 40px;
+    margin-left: 40px; }
 
   // Headings
   h1, h2, h3, h4, h5, h6 {
@@ -88,13 +104,62 @@
   // List
   ul, ol {
     margin-left: 0;
-    padding: 0 0 0 40px; }
+    padding: 0 0 0 $indent; }
 
   dd {
-    margin: 0 0 0 40px; }
+    margin: 0 0 0 $indent; }
+
+  // List bullets
+  ul li {
+    list-style-type: disc; }
+
+  ol li {
+    list-style-type: numeric; }
 
   nav ul,
   nav ol {
     list-style: none;
     list-style-image: none; }
+
+  // Margins
+  #{$blocks} {
+    margin: $vertical-margin 0; }
+}
+
+//@ [Mixin] if-no-boundary-margins
+// Removes top/bottom margins from a content block. Use with `if-content`.
+//
+@mixin if-no-boundary-margins {
+  #{$blocks} {
+    &:first-child {
+      margin-top: 0; }
+
+    &:last-child {
+      margin-bottom: 0; } } }
+
+//@ [Mixin] if-horizontal-dl
+// Horizontal definition lists.
+//
+@mixin if-horizontal-dl(
+  $term-width: 100px,
+  $margin: 20px,
+  $vertical-margin: 10px
+) {
+  dl {
+    @include pie-clearfix; }
+
+  dt {
+    clear: left;
+    float: left;
+    margin-right: $margin;
+    width: $term-width; }
+
+  dt, dd {
+    margin-top: $vertical-margin; }
+
+  dt:first-child, dt:first-child + dd {
+    margin-top: 0; }
+
+  dd {
+    float: left; }
 }
