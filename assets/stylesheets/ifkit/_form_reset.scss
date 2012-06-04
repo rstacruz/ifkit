@@ -1,0 +1,69 @@
+//@ [Group] Forms
+//
+
+//@ [Mixin] if-form-normalize
+// A supplement to CSS resets to ensure consistency of form elements as well.
+// Simply add `@include if-form-normalize;` to ensure consistency between browsers.
+@mixin if-form-normalize {
+  // Rules below marked [n] are stolen from github.com/necolas/normalize.css ;)
+
+  button, input[type="button"], input[type="reset"], input[type="submit"] {
+    cursor: pointer;
+    *overflow: visible; // [n] Removes inner spacing in IE7 without affecting normal text inputs
+  }
+
+  :disabled {
+    cursor: not-allowed; }
+
+  legend {
+    border: 0;
+    padding: 0;
+    white-space:        // [n] Corrects text not wrapping in FF3
+    *margin-left: -7px; // [n] Corrects alignment displayed oddly in IE6/7
+  }
+
+  button, input, select, textarea {
+    font-size: 100%;          // [n] Corrects font size not being inherited in all browsers
+    margin: 0;                // [n] Addresses margins set differently in IE6/7, FF3+, S5, Chrome
+    vertical-align: baseline; // [n] Improves appearance and consistency in all browsers
+    *vertical-align: middle;
+  }
+
+  // [n] Addresses FF3/4 setting line-height on 'input' using !important in the UA stylesheet
+  button, input {
+    line-height: normal; }
+
+  input[type="checkbox"],
+  input[type="radio"] {
+    box-sizing: border-box; // [n] Addresses box sizing set to content-box in IE8/9
+    padding: 0;             // [n] Removes excess padding in IE8/9
+    *height: 13px;          // [n] Removes excess padding in IE7
+    *width: 13px; }
+
+  // [n] Removes inner padding and border in FF3+
+  // www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/
+  button::-moz-focus-inner,
+  input::-moz-focus-inner {
+    border: 0;
+    padding: 0; }
+
+  textarea {
+    overflow: auto;      // [n] Removes default vertical scrollbar in IE6/7/8/9
+    vertical-align: top; // [n] Improves readability and alignment in all browsers
+  }
+}
+
+//@ [Mixin] if-form-reset
+// A supplement to CSS resets to ensure consistency of form elements, as well
+// as reset the appearances of buttons and other elements.
+@mixin if-form-reset {
+  fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0; }
+
+  button {
+    padding: 0;
+    border: 0;
+    margin: 0;
+    background: transparent; } }
