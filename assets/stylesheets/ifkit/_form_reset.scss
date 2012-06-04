@@ -48,6 +48,7 @@
     padding: 0; }
 
   textarea {
+    resize: vertical;    // Well who needs horizontal resizing anyway?
     overflow: auto;      // [n] Removes default vertical scrollbar in IE6/7/8/9
     vertical-align: top; // [n] Improves readability and alignment in all browsers
   }
