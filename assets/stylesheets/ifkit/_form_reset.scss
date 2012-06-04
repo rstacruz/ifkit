@@ -56,7 +56,12 @@
 //@ [Mixin] if-form-reset
 // A supplement to CSS resets to ensure consistency of form elements, as well
 // as reset the appearances of buttons and other elements.
+//
+// Implies `if-form-normalize`.
+//
 @mixin if-form-reset {
+  @include if-form-normalize;
+
   fieldset {
     border: 0;
     margin: 0;
