@@ -1,0 +1,54 @@
+// Ifkit / http://ricostacruz.com/ifkit
+// ------------------------------------
+
+//@[Group] Media query helpers
+//
+// Media query helpers.
+// Requires SASS 3.2. Don't use with 3.1 or lower.
+//
+// Examples:
+//
+//     body {
+//       @include if-mobile {
+//         #top, #footer { display: none; } }
+//       @include if-landscape {
+//         #menu { height: 20px; }
+//     }
+//
+@mixin if-phone {
+  @include if-screen-width($max: 480px) { @content; } }
+
+@mixin if-tablet {
+  @include if-screen-width(768px, 1024px) { @content; } }
+
+@mixin if-mobile {
+  @include if-screen-width($max: 1024px) { @content; } }
+
+@mixin if-desktop {
+  @include if-screen-width($min: 1024px) { @content; } }
+
+@mixin if-retina {
+  @include if-hidpi(2); }
+
+@mixin if-portrait {
+  @media only screen and (orientation: portrait) { @content; } }
+
+@mixin if-landscape {
+  @media only screen and (orientation: landscape) { @content; } }
+
+@mixin if-screen-width($min: none, $max: none) {
+  @if $min != none and $max != none {
+    @media only screen and (min-width: $min) and (max-width: $max) { @content; } }
+  @if $min != none and $max == none {
+    @media only screen and (min-width: $min) { @content; } }
+  @if $min == none and $max != none {
+    @media only screen and (max-width: $max) { @content; } }
+}
+
+@mixin if-hidpi($ratio: 2) {
+  @media
+    only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+    only screen and (-moz-min-device-pixel-ratio: $ratio),
+    only screen and (-webkit-min-device-pixel-ratio: $ratio),
+    only screen and (min-device-pixel-ratio: $ratio) {
+      @content; } }
