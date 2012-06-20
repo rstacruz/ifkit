@@ -1,0 +1,17 @@
+@mixin if-absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  @include if-position($top, $right, $bottom, $left, $position: absolute); }
+
+@mixin if-relative($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  @include if-position($top, $right, $bottom, $left, $position: relative); }
+
+@mixin if-position($top: auto, $right: auto, $bottom: auto, $left: auto, $position: auto) {
+  @if $position != auto {
+    position: $position; }
+  @if $top != auto {
+    top: $top; }
+  @if $right != auto {
+    right: $right; }
+  @if $bottom != auto {
+    bottom: $bottom; }
+  @if $left != auto {
+    left: $left; } }

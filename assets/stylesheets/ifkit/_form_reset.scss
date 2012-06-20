@@ -18,8 +18,8 @@
   legend {
     border: 0;
     padding: 0;
-    white-space:        // [n] Corrects text not wrapping in FF3
-    *margin-left: -7px; // [n] Corrects alignment displayed oddly in IE6/7
+    white-space: normal; // [n] Corrects text not wrapping in FF3
+    *margin-left: -7px;  // [n] Corrects alignment displayed oddly in IE6/7
   }
 
   button, input, select, textarea {

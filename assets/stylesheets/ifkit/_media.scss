@@ -15,6 +15,12 @@
 //         #menu { height: 20px; }
 //     }
 //
+$if-mobile-safari-portrait-height: 480px - 19px - 44px;
+$if-mobile-safari-landscape-height: 320px - 19px - 32px;
+
+@mixin if-phone-portrait {
+  @include if-screen-width($max: 320px) { @content; } }
+
 @mixin if-phone {
   @include if-screen-width($max: 480px) { @content; } }
 
@@ -28,7 +34,7 @@
   @include if-screen-width($min: 1024px) { @content; } }
 
 @mixin if-retina {
-  @include if-hidpi(2); }
+  @include if-hidpi(2) { @content; } }
 
 @mixin if-portrait {
   @media only screen and (orientation: portrait) { @content; } }
