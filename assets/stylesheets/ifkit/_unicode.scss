@@ -1,0 +1,39 @@
+// Common unicode characters.
+
+// https://en.wikipedia.org/wiki/Curved_quotes#Quotation_marks_in_English
+$rsaquo: '\203a'; // Right single angled quote (&rsaquo;)
+$lsaquo: '\2039'; // Left single angled quote (&lsaquo;)
+$raquo: '\00bb';  // Right double angled quote (&raquo;)
+$laquo: '\00ab';  // Left double angled quote (&laquo;)
+
+// https://en.wikipedia.org/wiki/Arrow_(symbol)
+$larr: '\2190';  // Left arrow (&larr;)
+$uarr: '\2191';  // Up arrow (&uarr;)
+$rarr: '\2192';  // Right arrow (&larr;)
+$darr: '\2193';  // Down arrow (&darr;)
+$lrarr: '\2194'; // Left right arrow (<->)
+$uparr: '\2195'; // Up down arrow
+$nwarr: '\2196'; // North west arrow
+$nearr: '\2197'; // North east arrow
+$searr: '\2198'; // South east arrow
+$swarr: '\2199'; // South west arrow
+
+// http://tech.karbassi.com/2009/05/27/command-option-shift-symbols-in-unicode/
+$cmdkey: '\2318';    // Cmd key
+$optkey: '\2325';    // Option key
+$shiftkey: '\21e7';  // Shift key
+$esckey: '\238b';    // Escape key
+$capskey: '\21ea';   // Caps lock key
+$returnkey: '\23ce'; // Return key
+$bkspkey: '\232b';   // Backspace key
+
+// https://en.wikipedia.org/wiki/Ndash
+$figdash: '\2012';  // Figure dash
+$ndash: '\2013';  // En dash
+$mdash: '\2014';  // Em dash
+
+// https://en.wikipedia.org/wiki/Bullet_(typography)
+$bull: '\2022';       // Circular bullet (&bull;)
+$tribull: '\2023';    // Triangular bullet
+$whitebull: '\25e6';  // White bullet, hollow
+$middot: '\2219';     // Middle dot
