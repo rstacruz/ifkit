@@ -1,7 +1,27 @@
+// Ifkit / http://ricostacruz.com/ifkit
+// ------------------------------------
+
+//@[Group] Positioning
+
+//@[Mixin] if-absolute($top, $right, $bottom, $left)
+//@[Mixin] if-relative($top, $right, $bottom, $left)
+//@[Mixin] if-fixed($top, $right, $bottom, $left)
+//
+// Macros for absolute, relative, and fixed positioning.
+//
+//    .toolbar {
+//      @include if-absolute(0, auto, 50px, 50px); }
+//
+//    .icon {
+//      @include if-relative(0, auto, 50px, 50px); }
+//
 @mixin if-absolute($top: auto, $right: auto, $bottom: auto, $left: auto) {
   @include if-position($top, $right, $bottom, $left, $position: absolute); }
 
 @mixin if-relative($top: auto, $right: auto, $bottom: auto, $left: auto) {
+  @include if-position($top, $right, $bottom, $left, $position: relative); }
+
+@mixin if-fixed($top: auto, $right: auto, $bottom: auto, $left: auto) {
   @include if-position($top, $right, $bottom, $left, $position: relative); }
 
 @mixin if-position($top: auto, $right: auto, $bottom: auto, $left: auto, $position: auto) {
