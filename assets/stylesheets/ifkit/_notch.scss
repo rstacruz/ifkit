@@ -87,8 +87,8 @@
       left: $size2 * -0.4193; } // 6px
 } }
 
-//@[Mixin] if-box-notch([ $from, $align ])
-//@[Mixin] if-box-notch([ $from, $align, ... ])
+//@[Mixin] if-box-notch([ $direction, $align ])
+//@[Mixin] if-box-notch([ $direction, $align, ... ])
 //
 //     # CSS
 //     .notched {
@@ -112,7 +112,7 @@
 // just `position: relative`.
 //
 @mixin if-box-notch(
-  $from: top,
+  $direction: bottom,
   $align: left,
   $offset: 10px,
   $inset: 0,
@@ -122,8 +122,14 @@
   $border: none,
   $shadow: none
 ) {
+  $opposite: top;
+  @if ($direction == top) { $opposite: bottom; }
+  @if ($direction == left) { $opposite: right; }
+  @if ($direction == bottom) { $opposite: top; }
+  @if ($direction == right) { $opposite: left; }
+
   @include if-notch(
-    $direction: $from,
+    $direction: $opposite,
     $color: $color,
     $size: $size,
     $border: $border,
@@ -132,5 +138,26 @@
   position: absolute;
 
   // top: -10px, left: 10px
-  #{$from}: -1 * $size + $inset;
+  #{$direction}: -1 * $size + $inset;
   #{$align}: $offset; }
+
+//@[Mixin] if-simple-notch($color, $size, $direction)
+// Simple notch.
+
+// Unlike *if-notch*, this one only supports color. It can't do shadows or
+// backgrounds. However, the markup it generates is much simpler.
+//
+//     @include if-simple-notch(left, #fff, 10px)
+//
+@mixin if-simple-notch($direction, $color, $size, $display: block) {
+  $opposite: top;
+  @if ($direction == top) { $opposite: bottom; }
+  @if ($direction == left) { $opposite: right; }
+  @if ($direction == bottom) { $opposite: top; }
+  @if ($direction == right) { $opposite: left; }
+
+  display: $display;
+  width: 0;
+  height: 0;
+  border: solid $size transparent;
+  border-#{$opposite}-color: $color; }
