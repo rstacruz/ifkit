@@ -18,7 +18,8 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
 //     # HAML
 //     .content-area
 //       %h2 Hello
-//       %p Lorem ipsum dolor sit amet...
+//       %p Dolorem sapiente animi et at. Quaerat quia ipsam ut ipsum non. Vel dolores voluptas similique.
+//       %p Aut ipsum vel fugiat id laborum adipisci ullam et. Recusandae nihil qui quod eum laboriosam. Laboriosam officia sunt sit architecto.
 //       %ul
 //         %li Lorem
 //         %li Hello
@@ -133,8 +134,19 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
     @include if-no-boundary-margins; }
 }
 
-//@ [Mixin] if-vertical-margins
+//@ [Mixin] if-vertical-margins($vertical-margin)
 // Adjusts vertical margins between blocks.
+//
+//     # CSS
+//     .contents {
+//       @include if-vertical-margins(20px); }
+//
+//     # HAML
+//     .content-area
+//       %h2 Hello
+//       %p Dolorem sapiente animi et at. Quaerat quia ipsam ut ipsum non. Vel dolores voluptas similique.
+//       %p Aut ipsum vel fugiat id laborum adipisci ullam et. Recusandae nihil qui quod eum laboriosam. Laboriosam officia sunt sit architecto.
+//
 //
 @mixin if-vertical-margins($vertical-margin: 20px) {
   #{$blocks} {

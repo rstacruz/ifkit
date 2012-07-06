@@ -72,7 +72,7 @@ body {
   &:after {
     content: '';
     position: fixed;
-    z-index: 31336;
+    z-index: 10;
     top: 0;
     left: 0;
     right: 0;
@@ -111,14 +111,14 @@ body {
   span {
     color: #555; } }
 
-#if-content {
+#-if-content {
   margin: 40px;
   padding-top: 40px;
   width: 860px; }
 
 /////////////////////////////////////////////////////////////////////////////
 
-#if-index {
+#-if-index {
   position: fixed;
   top: 60px;
   right: 20px;
@@ -128,7 +128,7 @@ body {
   z-index: 31335;
 
   @include box-sizing(border-box);
-  padding: 10px;
+  padding: 10px 0;
   @include border-radius(3px);
   border: solid 1px #ddd;
 
@@ -140,18 +140,24 @@ body {
 
   a {
     color: #888;
-    text-shadow: 1px 1px 1px rgba(white, 0.2);
+    text-shadow: 0 1px 0 rgba(white, 0.5);
     text-decoration: none;
+    padding: 0 10px;
     display: block; }
 
   a.if-level-1,
   a.if-level-2 {
-    margin: 5px 0;
+    padding: 8px 10px;
+    border-top: solid 1px #ddd;
+    margin: 8px 0 0 0;
     color: #666;
     font-weight: bold; }
 
   a.if-level-1 {
     color: #333; }
+
+  a:hover {
+    background: rgba(black, 0.05); }
 }
 
 /////////////////////////////////////////////////////////////////////////////

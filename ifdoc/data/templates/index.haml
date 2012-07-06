@@ -12,7 +12,7 @@
       %strong= project.name
       %span documentation
 
-    #if-content
+    #-if-content
       - blocks.each do |b|
         %section{id: b.id, class: "if-section if-level-#{b.level} if-type-#{b.main_type}"}
 
@@ -24,7 +24,7 @@
 
           = b.html
 
-    #if-index{style: 'display: none'}
+    #-if-index
       - blocks.each do |b|
         - b.headings.each do |h|
           %a{href: "##{b.id}", class: "if-level-#{b.level}"}= h
