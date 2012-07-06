@@ -6,18 +6,29 @@
 // Media query helpers.
 // Requires SASS 3.2. Don't use with 3.1 or lower.
 //
+$if-mobile-safari-portrait-height: 480px - 19px - 44px;
+$if-mobile-safari-landscape-height: 320px - 19px - 32px;
+
+//@[Mixin] if-phone-portrait
+//@[Mixin] if-phone
+//@[Mixin] if-tablet
+//@[Mixin] if-mobile
+//@[Mixin] if-desktop
+// Mixins for presets of width ranges.
+// Phone-portrait is < 320px, Phone is <480px, Tablet is 768px to 1024px.
+//
+// Mobile is <1024px, which encompasses phones and tablets.
+// Desktop is >1024px which accounts for typical maximized desktop screens.
+//
 // Examples:
 //
 //     body {
 //       @include if-mobile {
 //         #top, #footer { display: none; } }
-//       @include if-landscape {
+//       @include if-phone {
 //         #menu { height: 20px; }
 //     }
 //
-$if-mobile-safari-portrait-height: 480px - 19px - 44px;
-$if-mobile-safari-landscape-height: 320px - 19px - 32px;
-
 @mixin if-phone-portrait {
   @include if-screen-width($max: 320px) { @content; } }
 
@@ -33,23 +44,34 @@ $if-mobile-safari-landscape-height: 320px - 19px - 32px;
 @mixin if-desktop {
   @include if-screen-width($min: 1024px) { @content; } }
 
-@mixin if-retina {
-  @include if-hidpi(2) { @content; } }
-
-@mixin if-portrait {
-  @media only screen and (orientation: portrait) { @content; } }
-
-@mixin if-landscape {
-  @media only screen and (orientation: landscape) { @content; } }
-
+//@[Mixin] if-screen-width($min, $max)
+// Screen widths. You may specify min and max as either a `px` number, or `none`.
+//
+//     @include if-screen-width(480px, none) { ... }    /* 480px and up */
+//     @include if-screen-width($max: 1024px) { ... }   /* 1024px and below */
+//     @include if-screen-width(none, 1024px) { ... }   /* 1024px and below */
+//
 @mixin if-screen-width($min: none, $max: none) {
   @if $min != none and $max != none {
     @media only screen and (min-width: $min) and (max-width: $max) { @content; } }
   @if $min != none and $max == none {
     @media only screen and (min-width: $min) { @content; } }
   @if $min == none and $max != none {
-    @media only screen and (max-width: $max) { @content; } }
-}
+    @media only screen and (max-width: $max) { @content; } } }
+
+//@[Mixin] if-retina
+// Checks for retina support.
+@mixin if-retina {
+  @include if-hidpi(2) { @content; } }
+
+//@[Mixin] if-portait
+//@[Mixin] if-landscape
+// Mixins for portait or landscape mode for mobile devices.
+@mixin if-portrait {
+  @media only screen and (orientation: portrait) { @content; } }
+
+@mixin if-landscape {
+  @media only screen and (orientation: landscape) { @content; } }
 
 @mixin if-hidpi($ratio: 2) {
   @media
