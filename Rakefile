@@ -31,6 +31,6 @@ namespace :doc do
   desc "Deploys documentation to GitHub pages."
   task :deploy => :build do
     repo = ENV['to'] || 'rstacruz/ifkit'
-    system "git-update-ghpages #{repo} -i output"
+    system "git-update-ghpages #{repo} -i output --force"
   end
 end
