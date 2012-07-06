@@ -1,0 +1,29 @@
+// @include if-keyframes(drift) {
+//   0% { background-position: 0 0; }
+//   100% { background-position: -1000px 0; }
+// }
+// @include if-animation(drift, 90s, infinite, linear)
+
+@mixin if-animation($name: inherit, $duration: inherit, $count: inherit, $timing: inherit) {
+  @if $name != inherit {
+    @include experimental(animation-name, $name, -moz, -webkit, -o, -ms, -khtml, official) }
+  @if $duration != inherit {
+    @include experimental(animation-duration, $duration, -moz, -webkit, -o, -ms, -khtml, official) }
+  @if $count != inherit {
+  @include experimental(animation-iteration-count, $count, -moz, -webkit, -o, -ms, -khtml, official) }
+  @if $timing != inherit {
+    @include experimental(animation-timing-function, $timing, -moz, -webkit, -o, -ms, -khtml, official) } }
+
+@mixin if-keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content }
+  @-moz-keyframes #{$name} {
+    @content }
+  @-o-keyframes #{$name} {
+    @content }
+  @-ms-keyframes #{$name} {
+    @content }
+  @-khtml-keyframes #{$name} {
+    @content }
+  @keyframes #{$name} {
+    @content } }
