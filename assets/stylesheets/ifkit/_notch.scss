@@ -147,14 +147,8 @@
   $border: none,
   $shadow: none
 ) {
-  $opposite: top;
-  @if ($direction == top) { $opposite: bottom; }
-  @if ($direction == left) { $opposite: right; }
-  @if ($direction == bottom) { $opposite: top; }
-  @if ($direction == right) { $opposite: left; }
-
   @include if-notch(
-    $direction: $opposite,
+    $direction: $direction,
     $color: $color,
     $size: $size,
     $border: $border,
