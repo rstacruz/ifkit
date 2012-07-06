@@ -9,7 +9,7 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
 //
 // Mixin for normalizing.
 
-//@ [Mixin] if-content
+//@ [Mixin] if-content([ $vertical-margin, $indent, $collapse ])
 //
 //     # CSS
 //     .content-area {
@@ -35,9 +35,14 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
 //   $indent ::
 //   Indentation for lists, blockquotes and such. Defaults to `25px`.
 //
+//   $collapse ::
+//   If `true`, ensures that the top/bottom blocks don't have margins. Defaults
+//   to `true`.
+//
 @mixin if-content(
   $vertical-margin: 20px,
-  $indent: 25px
+  $indent: 25px,
+  $collapse: true
 ) {
   table {
     border-collapse: collapse;
@@ -122,9 +127,18 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
     list-style-image: none; }
 
   // Margins
-  #{$blocks} {
-    margin: $vertical-margin 0; }
+  @include if-vertical-margins($vertical-margin);
+
+  @if ($collapse == true) {
+    @include if-no-boundary-margins; }
 }
+
+//@ [Mixin] if-vertical-margins
+// Adjusts vertical margins between blocks.
+//
+@mixin if-vertical-margins($vertical-margin: 20px) {
+  #{$blocks} {
+    margin: $vertical-margin 0; } }
 
 //@ [Mixin] if-no-boundary-margins
 // Removes top/bottom margins from a content block. Use with `if-content`.
