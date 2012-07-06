@@ -4,27 +4,27 @@ namespace :doc do
   desc "Builds documentation in output/."
 
   task :build do
+    gem 'sass', '> 3.1.9'
     require 'ifdoc'
     require 'yaml'
 
+    print "Building output/index.html... "
     s = Ifdoc::Project.new YAML::load_file('ifdoc.yml')
     s.build!
 
-    puts "Wrote to output/index.html."
+    puts "OK."
   end
 
   desc "Rebuilds documentation as files change."
   task :watch do
-    require 'fssm'
+    gem 'listen', '0.4.7'
+    require 'listen'
 
     puts "Watching #{Dir.pwd}..."
-    FSSM.monitor(Dir.pwd, '**/*') do
-      update { |base, f|
-        unless f.include?('output')
-          puts "Building..."
-          system "rake doc:build"
-        end
-      }
+    Listen.to Dir.pwd, ignore: %r[output] do |m, a, r|
+      (m+a).each do |f|
+        Rake.application.invoke_task :'doc:build'
+      end
     end
   end
 
