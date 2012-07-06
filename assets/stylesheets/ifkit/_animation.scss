@@ -17,7 +17,8 @@
 //       100% { background-position: -1000px 0; }
 //     }
 //
-//     @include if-animation(drift, 90s, infinite, linear)
+//     .images {
+//       @include if-animation(drift, 90s, infinite, linear); }
 
 //@[Mixin] if-animation($name, $duration, $count, $timing)
 // Makes animations. See above for an example.
