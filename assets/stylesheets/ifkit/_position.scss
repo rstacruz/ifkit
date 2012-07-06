@@ -4,6 +4,8 @@
 //@[Group] Positioning
 //
 // Macros to help make absolute/relative positioning easier.
+//
+// To use, import this group in your stylesheet using `@import 'ifkit/position';`.
 
 //@[Mixin] if-absolute($top, $right, $bottom, $left)
 //@[Mixin] if-relative($top, $right, $bottom, $left)

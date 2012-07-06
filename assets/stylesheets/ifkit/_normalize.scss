@@ -7,7 +7,9 @@ $blocks: ul, h1, h2, h3, h4, h5, h6, p, blockquote, dl;
 
 //@ [Group] Normalize
 //
-// Mixin for normalizing.
+// Mixin for normalizing content appearances. Great if you use a reset.
+//
+// To use, import this group in your stylesheet using `@import 'ifkit/normalize';`.
 
 //@ [Mixin] if-content([ $vertical-margin, $indent, $collapse ])
 //

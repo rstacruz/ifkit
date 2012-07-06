@@ -1,5 +1,7 @@
-//@ [Group] Forms
+//@ [Group] Form reset
+// Form resets.
 //
+// To use, import this group in your stylesheet using `@import 'ifkit/form_reset';`.
 
 //@ [Mixin] if-form-normalize
 // A supplement to CSS resets to ensure consistency of form elements as well.

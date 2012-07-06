@@ -5,6 +5,8 @@
 //
 // Media query helpers.
 // Requires SASS 3.2. Don't use with 3.1 or lower.
+
+// To use, import this group in your stylesheet using `@import 'ifkit/media';`.
 //
 $if-mobile-safari-portrait-height: 480px - 19px - 44px;
 $if-mobile-safari-landscape-height: 320px - 19px - 32px;

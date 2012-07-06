@@ -10,6 +10,8 @@
 // -1` for button borders, and elements with negative z-indices will not be
 // visible if it's not placed a parent that has a `z-index` of `>= 0`.
 
+// To use, import this group in your stylesheet using `@import 'ifkit/button';`.
+
 @import 'compass/css3';
 
 //@[Mixin] if-primary-button

@@ -3,6 +3,31 @@
 
 //@[Group] Notch
 // For tooltips and things that have triangles sticking out of them.
+//
+// To use, import this group in your stylesheet using `@import 'ifkit/notch';`.
+
+//@[Mixin] if-simple-notch($color, $size, $direction)
+// Simple notch.
+//
+// Unlike *if-notch*, this one only supports color. It can't do shadows or
+// backgrounds. However, the markup it uses is much simpler, there is no
+// need for an extra element, and it's possible to use it on a `:before` or
+// `:after` pseudo-element.
+//
+//     @include if-simple-notch(left, #fff, 10px)
+//
+@mixin if-simple-notch($direction, $color, $size, $display: block) {
+  $opposite: top;
+  @if ($direction == top) { $opposite: bottom; }
+  @if ($direction == left) { $opposite: right; }
+  @if ($direction == bottom) { $opposite: top; }
+  @if ($direction == right) { $opposite: left; }
+
+  display: $display;
+  width: 0;
+  height: 0;
+  border: solid $size transparent;
+  border-#{$opposite}-color: $color; }
 
 //@[Mixin] if-notch([ $direction: top, $color, $size, $border, $shadow ])
 //
@@ -141,23 +166,3 @@
   #{$direction}: -1 * $size + $inset;
   #{$align}: $offset; }
 
-//@[Mixin] if-simple-notch($color, $size, $direction)
-// Simple notch.
-
-// Unlike *if-notch*, this one only supports color. It can't do shadows or
-// backgrounds. However, the markup it generates is much simpler.
-//
-//     @include if-simple-notch(left, #fff, 10px)
-//
-@mixin if-simple-notch($direction, $color, $size, $display: block) {
-  $opposite: top;
-  @if ($direction == top) { $opposite: bottom; }
-  @if ($direction == left) { $opposite: right; }
-  @if ($direction == bottom) { $opposite: top; }
-  @if ($direction == right) { $opposite: left; }
-
-  display: $display;
-  width: 0;
-  height: 0;
-  border: solid $size transparent;
-  border-#{$opposite}-color: $color; }
