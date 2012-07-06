@@ -1,9 +1,24 @@
-// @include if-keyframes(drift) {
-//   0% { background-position: 0 0; }
-//   100% { background-position: -1000px 0; }
-// }
-// @include if-animation(drift, 90s, infinite, linear)
+// Ifkit / http://ricostacruz.com/ifkit
+// ------------------------------------
 
+//@[Group] Animations
+//
+// Easy cross-browser animations. Supported by FF, Webkits, and IE10+ so far.
+// ([Reference](http://caniuse.com/#feat=css-animation))
+//
+// Note: this is only useable in Sass 3.2.
+//
+// ### Example usage
+//
+//     @include if-keyframes(drift) {
+//       0% { background-position: 0 0; }
+//       100% { background-position: -1000px 0; }
+//     }
+//
+//     @include if-animation(drift, 90s, infinite, linear)
+
+//@[Mixin] if-animation($name, $duration, $count, $timing)
+// Makes animations. See above for an example.
 @mixin if-animation($name: inherit, $duration: inherit, $count: inherit, $timing: inherit) {
   @if $name != inherit {
     @include experimental(animation-name, $name, -moz, -webkit, -o, -ms, -khtml, official) }
@@ -14,6 +29,8 @@
   @if $timing != inherit {
     @include experimental(animation-timing-function, $timing, -moz, -webkit, -o, -ms, -khtml, official) } }
 
+//@[Mixin] if-keyframes($name) { ... }
+// Defines keyframes for an animation. See above for an example.
 @mixin if-keyframes($name) {
   @-webkit-keyframes #{$name} {
     @content }
