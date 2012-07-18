@@ -64,7 +64,7 @@ $if-mobile-safari-landscape-height: 320px - 19px - 32px;
 //@[Mixin] if-retina
 // Checks for retina support.
 @mixin if-retina {
-  @include if-hidpi(2) { @content; } }
+  @include if-hidpi(1.5, "3/2") { @content; } }
 
 //@[Mixin] if-portait
 //@[Mixin] if-landscape
@@ -75,9 +75,9 @@ $if-mobile-safari-landscape-height: 320px - 19px - 32px;
 @mixin if-landscape {
   @media only screen and (orientation: landscape) { @content; } }
 
-@mixin if-hidpi($ratio: 2) {
+@mixin if-hidpi($ratio: 2, $opera-ratio: "#{$ratio}/1") {
   @media
-    only screen and (-o-min-device-pixel-ratio: #{$ratio}/1),
+    only screen and (-o-min-device-pixel-ratio: $opera-ratio),
     only screen and (-moz-min-device-pixel-ratio: $ratio),
     only screen and (-webkit-min-device-pixel-ratio: $ratio),
     only screen and (min-device-pixel-ratio: $ratio) {
