@@ -1,6 +1,8 @@
 // Ifkit / http://ricostacruz.com/ifkit
 // ------------------------------------
 
+@import 'compass/utilities/general/clearfix';
+
 //@ [Group] Forms
 //
 // To use, import this group in your stylesheet using `@import 'ifkit/form';`.
@@ -215,7 +217,7 @@ $if-widths: (10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100) !default;
   $control: $if-form-control
 ) {
   #{$field} {
-    @include if-clearfix;
+    @include pie-clearfix;
     margin: $vertical-margin 0;
     min-height: $field-height;
     padding: 0 0 0 $label-width;
@@ -255,7 +257,7 @@ $if-widths: (10, 20, 25, 30, 40, 50, 60, 70, 75, 80, 90, 100) !default;
       #{$control-group} {
         &.horizontal {
           // Compensate for the margins in the individual elements.
-          @include if-clearfix;
+          @include pie-clearfix;
           margin-right: -1 * $horiz-margin;
           margin-bottom: -1 * $horiz-margin; }
 
