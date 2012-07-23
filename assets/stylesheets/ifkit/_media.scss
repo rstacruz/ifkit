@@ -78,7 +78,7 @@ $if-mobile-safari-landscape-height: 320px - 19px - 32px;
 @mixin if-hidpi($ratio: 2, $opera-ratio: "#{$ratio}/1") {
   @media
     only screen and (-o-min-device-pixel-ratio: $opera-ratio),
-    only screen and (-moz-min-device-pixel-ratio: $ratio),
+    only screen and (min--moz-device-pixel-ratio: $ratio),
     only screen and (-webkit-min-device-pixel-ratio: $ratio),
     only screen and (min-device-pixel-ratio: $ratio) {
       @content; } }
