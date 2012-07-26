@@ -33,6 +33,7 @@
   %script{:src => "http://cachedcommons.org/cache/prettify/1.0.0/javascripts/prettify-min.js"}
   :javascript
     if (typeof prettyPrint !== 'undefined') {
+      $(".if-section > pre").addClass('prettyprint');
       prettyPrint();
     }
   :javascript
