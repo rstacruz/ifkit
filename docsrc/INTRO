@@ -1,5 +1,38 @@
 #@[Intro] Ifkit
 #
-# Ifkit, or Interface Foundation Kit, is a set of convenience mixins for your everyday SASS needs.
-# We've been making the same classes for almost every project we do,
-# so we're moving to standardize that set of controls.
+# Ifkit, or Interface Foundation Kit, is a set of convenience mixins for your
+# everyday SASS needs.  We've been making the same classes for almost every
+# project we do, so we're moving to standardize that set of controls.
+#
+# ### Requirements
+#
+# Ifkit requires [Sass][sass] and [Compass][comp]. Some Ifkit mixins need Sass
+# 3.2+ to function (they're marked as such in this documentation), while most
+# will work with any version of Sass.
+#
+# ### How to use
+#
+# Add the [Ifkit stylesheets][sheets] into your project. The recommended usage
+# is to put `ifkit/` into your project's Sass directory
+# (`vendor/assets/stylesheets/` in Rails).
+#
+# ### Why Ifkit?
+#
+# Ifkit aims to be a collection of self-contained building blocks of common
+# interface patterns. It is not a CSS framework like Bootstrap and such.
+#
+# ### Sass 3.2 notes
+#
+# Some mixins may need Sass 3.2+ (specifically the media queries). This is
+# to support mixins that can have content blocks (`eg, +if-retina { ... }`).
+#
+# If you arre using Ruby + Bundler, simply update your Gemfile to use a
+# prerelease version:
+#
+#     gem 'sass', '~> 3.2.0.alpha'
+#
+# Or if you don't use Bundler, install it with `gem install sass --pre`.
+#
+# [sass]: http://sass-lang.com
+# [comp]: http://compass-style.org
+# [sheets]: https://github.com/rstacruz/ifkit/tree/master/assets/stylesheets
